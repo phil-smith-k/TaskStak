@@ -1,3 +1,3 @@
 dotnet tool uninstall -g TaskStak 
 dotnet pack 
-dotnet tool install -g --add-source "TaskStak.CLI/bin/Release" TaskStak
+dotnet tool install -g --add-source "src/TaskStak.CLI/bin/Release" TaskStak
