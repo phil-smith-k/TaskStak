@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Commands\" />
     <Folder Include="Utils\" />
     <Folder Include="Services\" />
