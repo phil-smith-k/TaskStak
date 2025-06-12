@@ -1,7 +1,12 @@
 ﻿using System.CommandLine;
 using TaskStak.CLI.Commands;
 
-var rootCommand = new RootCommand("TaskStak - A brutally fast task management CLI")
+#if DEBUG
+    Console.WriteLine("Waiting for debugger. Press any key to continue...");
+    Console.ReadKey();
+#endif
+
+var rootCommand = new RootCommand("TaskStak - A developer-focused, performant task management CLI tool.")
 {
     AddCommand.Create() 
 };
