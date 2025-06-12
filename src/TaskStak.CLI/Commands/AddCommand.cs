@@ -31,11 +31,9 @@ namespace TaskStak.CLI.Commands
         public static void Execute(string[] titleArgs, string statusOpt)
         {
             var title = string.Join(" ", titleArgs);
-
             var tasks = JsonHelper.LoadTasks();
 
             tasks.Add(new TaskEntry(title));
-
             JsonHelper.SaveTasks(tasks);
 
             Console.WriteLine(Messages.TaskAdded);

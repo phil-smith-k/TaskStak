@@ -8,7 +8,7 @@ using TaskStak.CLI.Commands;
 
 var rootCommand = new RootCommand("TaskStak - A developer-focused, performant task management CLI tool.")
 {
-    AddCommand.Create() 
+    AddCommand.Create(),
 };
 
 return await rootCommand.InvokeAsync(args);
