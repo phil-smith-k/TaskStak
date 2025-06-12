@@ -10,6 +10,7 @@
         public static class TaskStakCommands
         {
             public const string Add = "Add a task to your stak.";
+            public const string List = "List current tasks in stak.";
         }
 
         public static class Arguments
@@ -37,5 +38,6 @@
     public static class TaskStakCommands
     {
         public const string Add = "add";
+        public const string List = "ls";
     }
 }
