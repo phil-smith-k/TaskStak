@@ -1,24 +1,13 @@
 ﻿namespace TaskStak.CLI.Models
 {
-    public class TaskEntry
+    public class TaskEntry(string title, TaskEntryStatus status = TaskEntryStatus.Active)
     {
-
-#region Constructors
-        public TaskEntry(string title)
-        {
-            this.Title = title;
-            this.Timeline = Timeline.Begin();
-
-            this.Status = Flags<TaskEntryStatus>.From(TaskEntryStatus.Active);
-        }
-#endregion
-
 #region Properties
-        public Flags<TaskEntryStatus> Status { get; set; }
+        public Flags<TaskEntryStatus> Status { get; set; } = Flags<TaskEntryStatus>.From(status);
 
-        public Timeline Timeline { get; set; }
+        public Timeline Timeline { get; set; } = Timeline.Begin();
 
-        public string? Title { get; set; }
+        public string Title { get; set; } = title;
 
         public bool IsActive
             => this.Status.IsOn(TaskEntryStatus.Active);

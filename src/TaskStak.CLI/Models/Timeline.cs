@@ -2,13 +2,11 @@
 {
     public class Timeline
     {
-        private Timeline()
-        {
-            this.CreatedOn = DateTime.UtcNow;
-        }
+        public Timeline()
+        { }
 
         #region Properties
-        public DateTime? CompletedOn { get; private set; }
+        public DateTime? CompletedOn { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
@@ -26,7 +24,10 @@
         #region Static Methods
         public static Timeline Begin()
         {
-            return new Timeline();
+            return new Timeline
+            {
+                CreatedOn = DateTime.UtcNow,
+            };
         }
         #endregion
     }
