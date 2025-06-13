@@ -2,6 +2,6 @@
 {
     public abstract class EntityRoot
     {
-        public string Id { get; init; } = Utils.LookupKey.New();
+        public EntityId Id { get; init; } = EntityId.New();
     }
 }

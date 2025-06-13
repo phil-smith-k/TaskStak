@@ -6,10 +6,9 @@ namespace TaskStak.CLI.Utils
     {
         public static TaskEntry Map(Persistence.Models.TaskEntry source)
         {
-            // TECH DEBT: null-forgiving is used here, but not null should be guaranteed by the persistence model.
-            return new TaskEntry(source.Title!, (TaskEntryStatus)source.Status)
+            return new TaskEntry(source.Title, (TaskEntryStatus)source.Status)
             {
-                Id = source.Id,
+                Id = EntityId.Parse(source.Id),
                 Timeline = Map(source.Timeline!),
             };
         }
