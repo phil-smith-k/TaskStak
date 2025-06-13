@@ -1,4 +1,6 @@
 ﻿using System.CommandLine;
+using TaskStak.CLI.Models;
+using TaskStak.CLI.Presentation.Views;
 using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Commands
@@ -18,7 +20,7 @@ namespace TaskStak.CLI.Commands
 
         public static void Execute()
         {
-            var tasks = JsonHelper.LoadTasks(t => t.IsActive);
+            var tasks = JsonHelper.LoadTasks();
 
             if (tasks.Count == 0)
             {
@@ -26,7 +28,8 @@ namespace TaskStak.CLI.Commands
                 return;
             }
 
-            tasks.ForEach(task => Console.WriteLine($"{task.Status.Value}: {task.Title} - (Created: {task.Timeline.CreatedOn})"));
+            var view = ListViewFactory.GetViewFor(ListViewType.Default);
+            view.Render(tasks);
         }
     }
 }
