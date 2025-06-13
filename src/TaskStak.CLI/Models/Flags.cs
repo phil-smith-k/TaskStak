@@ -3,14 +3,14 @@
     /// <summary>
     /// Provides a type-safe wrapper for working with bitwise flags of an enumeration type.
     /// </summary>
-    /// <remarks>This struct allows manipulation of bitwise flags for a specified enumeration type, including
+    /// <remarks>This class allows manipulation of bitwise flags for a specified enumeration type, including
     /// adding, removing, and checking for specific flags. It is designed to simplify working with enums that are
     /// marked with the <see cref="FlagsAttribute"/>.</remarks>
     /// <typeparam name="TFlag">The enumeration type that represents the flags. Must be a value type and derive from <see cref="Enum"/>.</typeparam>
-    public struct Flags<TFlag> where TFlag : struct, Enum
+    public class Flags<TFlag> where TFlag : struct, Enum
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Flags{TFlag}"/> struct with the specified flag value.
+        /// Initializes a new instance of the <see cref="Flags{TFlag}"/> class with the specified flag value.
         /// </summary>
         /// <param name="value">The initial value of the flag.</param>
         private Flags(TFlag value)
