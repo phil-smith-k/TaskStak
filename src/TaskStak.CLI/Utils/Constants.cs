@@ -3,6 +3,7 @@
     public static class Arguments
     {
         public const string Title = "title";
+        public const string View = "view";
     }
 
     public static class Descriptions
@@ -17,6 +18,7 @@
         public static class Arguments
         {
             public const string Title = "The title of the task.";
+            public const string View = "The specific view to use for listing tasks. Defaults to 'Day'.";
         }
 
         public static class Options
@@ -44,6 +46,7 @@
     {
         public const string Add = "add";
         public const string Done = "done";
-        public const string List = "ls";
+        public const string List = "list";
+        public const string ListAlias = "ls";
     }
 }

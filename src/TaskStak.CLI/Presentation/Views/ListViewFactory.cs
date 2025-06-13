@@ -4,11 +4,13 @@ namespace TaskStak.CLI.Presentation.Views
 {
     public class ListViewFactory
     {
-        public static IListView GetViewFor(ListViewType type, ListOptions? options = null)
+        public static IListView GetViewFor(ListOptions? options = null)
         {
-            return type switch
+            options ??= new ListOptions(); 
+
+            return options.ViewArgument switch
             {
-                _ => new DefaultListView(options ?? new())
+                _ => new DefaultListView(options)
             };
         }
     }
