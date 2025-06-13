@@ -12,7 +12,7 @@
         {
             public const string Add = "Add a task to your stak.";
             public const string Done = "Mark a task complete.";
-            public const string List = "List current tasks in stak.";
+            public const string View = "View current tasks in stak.";
         }
 
         public static class Arguments
@@ -46,7 +46,7 @@
     {
         public const string Add = "add";
         public const string Done = "done";
-        public const string List = "list";
-        public const string ListAlias = "ls";
+        public const string View = "view";
+        public const string ViewAlias = "v";
     }
 }

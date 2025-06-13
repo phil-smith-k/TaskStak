@@ -10,7 +10,7 @@ var rootCommand = new RootCommand("TaskStak - A developer-focused, performant ta
 {
     AddCommand.Create(),
     DoneCommand.Create(),
-    ListCommand.Create(),
+    ViewCommand.Create(),
 };
 
 return await rootCommand.InvokeAsync(args);

@@ -6,15 +6,16 @@ using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Commands
 {
-    public class ListCommand : ITaskStakCommand
+    public class ViewCommand : ITaskStakCommand
     {
-        public const string Name = TaskStakCommands.List;
-        public const string Description = Descriptions.TaskStakCommands.List;
+        public const string Name = TaskStakCommands.View;
+        public const string Description = Descriptions.TaskStakCommands.View;
 
         public static Command Create()
         {
             var viewArg = new Argument<ViewArgument>(
                 name: Arguments.View, 
+                isDefault: true,
                 parse: ParseViewArgument,
                 description: Descriptions.Arguments.View);
 
@@ -23,7 +24,7 @@ namespace TaskStak.CLI.Commands
                 viewArg,
             };
 
-            command.AddAlias(TaskStakCommands.ListAlias);
+            command.AddAlias(TaskStakCommands.ViewAlias);
             command.SetHandler(Execute, viewArg);
 
             return command;
