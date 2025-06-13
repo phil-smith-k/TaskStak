@@ -27,6 +27,7 @@
     public static class Messages
     {
         public const string TaskAdded = "✅ Task added successfully.";
+        public const string NoTasksFound = "❌ No tasks found.";
     }
 
     public static class Options

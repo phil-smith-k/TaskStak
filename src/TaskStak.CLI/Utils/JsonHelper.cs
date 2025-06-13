@@ -20,6 +20,11 @@ namespace TaskStak.CLI.Utils
 
         public static List<TaskEntry> LoadTasks()
         {
+            return LoadTasks(t => true);
+        }
+
+        public static List<TaskEntry> LoadTasks(Func<TaskEntry, bool> predicate)
+        {
             if (!File.Exists(TasksFilePath))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(TasksFilePath)!);
@@ -29,7 +34,10 @@ namespace TaskStak.CLI.Utils
             var json = File.ReadAllText(TasksFilePath);
             var tasks = JsonSerializer.Deserialize<Persistence.Models.TaskEntry[]>(json, JsonOptions) ?? [];
 
-            return tasks.Select(OutboundMapper.Map).ToList();
+            return tasks
+                .Select(OutboundMapper.Map)
+                .Where(predicate)
+                .ToList();
         }
 
         public static void SaveTasks(List<TaskEntry> tasks)
@@ -37,7 +45,6 @@ namespace TaskStak.CLI.Utils
             Directory.CreateDirectory(Path.GetDirectoryName(TasksFilePath)!);
 
             var models = tasks.Select(InboundMapper.Map).ToArray();
-
             var json = JsonSerializer.Serialize(models, JsonOptions);
 
             File.WriteAllText(TasksFilePath, json);

@@ -18,12 +18,15 @@ namespace TaskStak.CLI.Commands
 
         public static void Execute()
         {
-            var tasks = JsonHelper.LoadTasks();
+            var tasks = JsonHelper.LoadTasks(t => t.IsActive);
 
-            foreach (var task in tasks)
+            if (tasks.Count == 0)
             {
-                Console.WriteLine($"{task.Status.Value}: {task.Title} - (Created: {task.Timeline.CreatedOn})");
+                Console.WriteLine(Messages.NoTasksFound);
+                return;
             }
+
+            tasks.ForEach(task => Console.WriteLine($"{task.Status.Value}: {task.Title} - (Created: {task.Timeline.CreatedOn})"));
         }
     }
 }
