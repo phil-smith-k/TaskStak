@@ -1,6 +1,6 @@
 ﻿namespace TaskStak.CLI.Models
 {
-    public class TaskEntry(string title, TaskEntryStatus status = TaskEntryStatus.Active)
+    public class TaskEntry(string title, TaskEntryStatus status = TaskEntryStatus.Active) : EntityRoot
     {
 #region Properties
         public Flags<TaskEntryStatus> Status { get; set; } = Flags<TaskEntryStatus>.From(status);
@@ -26,6 +26,5 @@
             this.Status.SetTo(TaskEntryStatus.Completed);
         }
 #endregion  
-
     }
 }

@@ -2,6 +2,8 @@
 {
     public class TaskEntry
     {
+        public required string Id { get; set; }
+
         public int Status { get; set; }
 
         public string? Title { get; set; }

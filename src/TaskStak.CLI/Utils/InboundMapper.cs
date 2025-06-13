@@ -8,6 +8,7 @@ namespace TaskStak.CLI.Utils
         {
             return new TaskEntry
             {
+                Id = source.Id,
                 Title = source.Title,
                 Status = (int)source.Status.Value,
                 Timeline = Map(source.Timeline),
