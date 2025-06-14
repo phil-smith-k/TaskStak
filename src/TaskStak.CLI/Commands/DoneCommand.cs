@@ -1,5 +1,4 @@
 ﻿using System.CommandLine;
-using System.Xml.Linq;
 using TaskStak.CLI.Models;
 using TaskStak.CLI.Utils;
 
@@ -7,12 +6,12 @@ namespace TaskStak.CLI.Commands
 {
     public class DoneCommand : ITaskStakCommand
     {
-        public const string Name = TaskStakCommands.Done;
-        public const string Description = Descriptions.TaskStakCommands.Done;
+        public static string Name => Constants.Commands.Done;
+        public static string Description => Constants.Commands.Descriptions.DoneDesc;
 
         public static Command Create()
         {
-            var titleArg = new Argument<string[]>(Arguments.Title, Descriptions.Arguments.Title)
+            var titleArg = new Argument<string[]>(Constants.Arguments.Title, Constants.Arguments.Descriptions.TitleDesc)
             {
                 Arity = ArgumentArity.OneOrMore
             };
@@ -35,13 +34,13 @@ namespace TaskStak.CLI.Commands
             var count = filtered.Count;
             if (count == 0)
             {
-                Console.WriteLine(Messages.TaskNotFound);
+                Console.WriteLine(Constants.Messages.TaskNotFound);
                 return;
             }
 
             if (count > 1)
             {
-                Console.WriteLine(Messages.MultipleTasksFound);
+                Console.WriteLine(Constants.Messages.MultipleTasksFound);
                 return;
             }
 
@@ -50,7 +49,7 @@ namespace TaskStak.CLI.Commands
             task.Complete();
             JsonHelper.SaveTasks(tasks);
 
-            Console.WriteLine(Messages.TaskCompleted, task.Title);
+            Console.WriteLine(Constants.Messages.TaskCompleted, task.Title);
             return;
 
             bool FilterPredicate(TaskEntry tsk) => tsk.IsActive && 

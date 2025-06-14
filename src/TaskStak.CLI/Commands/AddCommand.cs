@@ -6,16 +6,16 @@ namespace TaskStak.CLI.Commands
 {
     public class AddCommand : ITaskStakCommand
     {
-        public const string Name = TaskStakCommands.Add;
-        public const string Description = Descriptions.TaskStakCommands.Add;
+        public static string Name => Constants.Commands.Add;
+        public static string Description => Constants.Commands.Descriptions.AddDesc;
 
         public static Command Create()
         {
-            var titleArg = new Argument<string[]>(Arguments.Title, Descriptions.Arguments.Title)
+            var titleArg = new Argument<string[]>(Constants.Arguments.Title, Constants.Arguments.Descriptions.TitleDesc)
             {
                 Arity = ArgumentArity.OneOrMore
             };
-            var statusOption = new Option<string>([Options.Status, Options.StatusAlias], Descriptions.Options.Status);
+            var statusOption = new Option<string>([Constants.Options.Status, Constants.Options.StatusAlias], Constants.Options.Descriptions.StatusDesc);
 
             var command = new Command(Name, Description)
             {
@@ -36,7 +36,7 @@ namespace TaskStak.CLI.Commands
             tasks.Add(new TaskEntry(title));
             JsonHelper.SaveTasks(tasks);
 
-            Console.WriteLine(Messages.TaskAdded);
+            Console.WriteLine(Constants.Messages.TaskAdded);
         }
     }
 }

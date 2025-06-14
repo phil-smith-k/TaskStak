@@ -8,23 +8,23 @@ namespace TaskStak.CLI.Commands
 {
     public class ViewCommand : ITaskStakCommand
     {
-        public const string Name = TaskStakCommands.View;
-        public const string Description = Descriptions.TaskStakCommands.View;
+        public static string Name => Constants.Commands.View;
+        public static string Description => Constants.Commands.Descriptions.ViewDesc;
 
         public static Command Create()
         {
             var viewArg = new Argument<ViewArgument>(
-                name: Arguments.View, 
+                name: Constants.Arguments.View, 
                 isDefault: true,
                 parse: ParseViewArgument,
-                description: Descriptions.Arguments.View);
+                description: Constants.Arguments.Descriptions.ViewDesc);
 
             var command = new Command(Name, Description)
             {
                 viewArg,
             };
 
-            command.AddAlias(TaskStakCommands.ViewAlias);
+            command.AddAlias(Constants.Commands.ViewAlias);
             command.SetHandler(Execute, viewArg);
 
             return command;
@@ -40,7 +40,7 @@ namespace TaskStak.CLI.Commands
 
             if (tasks.Count == 0)
             {
-                Console.WriteLine(Messages.NoTasksFound);
+                Console.WriteLine(Constants.Messages.NoTasksFound);
                 return;
             }
 
