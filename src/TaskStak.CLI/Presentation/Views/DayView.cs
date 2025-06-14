@@ -1,4 +1,6 @@
-﻿using TaskStak.CLI.Models;
+﻿using System.Text;
+using TaskStak.CLI.Models;
+using TaskStak.CLI.Presentation.Sections;
 
 namespace TaskStak.CLI.Presentation.Views
 {
@@ -8,10 +10,31 @@ namespace TaskStak.CLI.Presentation.Views
 
         public void Render(IEnumerable<TaskEntry> tasks)
         {
+            var (active, complete) = FilterTasks(tasks);
+
+            ISectionView[] sections =
+            [
+                new ActiveTasksSection(active),
+                new CompletedSection(complete)
+            ];
+
+            Array.ForEach(sections, section => section.Render());
+        }
+
+        private static (List<TaskEntry> Active, List<TaskEntry> Complete) FilterTasks(IEnumerable<TaskEntry> tasks)
+        {
+            var active = new List<TaskEntry>();
+            var complete = new List<TaskEntry>();
+
             foreach (var task in tasks)
             {
-                Console.WriteLine($"{task.Status.Value}: {task.Title} - (Created: {task.Timeline.CreatedOn})");
+                if (task.IsActive)
+                    active.Add(task);
+                else if (task.IsComplete)
+                    complete.Add(task);
             }
+
+            return (active, complete);
         }
     }
 }
