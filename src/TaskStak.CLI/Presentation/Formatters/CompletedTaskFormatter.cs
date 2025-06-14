@@ -3,16 +3,17 @@ using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Presentation.Formatters
 {
-    public class CompletedTaskFormatter : ITaskStakFormatter<TaskEntry>
+    public class CompletedTaskFormatter : TaskFormatterBase
     {
-        private static ITaskStakFormatter<DateTime> AgoFormatter => new DateTimeAgoFormatter();
-
-        public string Format(TaskEntry taskEntry)
+        public override string Format(TaskEntry taskEntry)
         {
-            var completedDate = taskEntry.Timeline.CompletedOn 
-                                ?? throw new NullReferenceException("Completed date cannot be null.");
+            var emoji = Constants.DisplaySymbol.Complete;
+            var title = taskEntry.Title;
 
-            return $"{taskEntry.Title} (completed {AgoFormatter.Format(completedDate)})";
+            var completedDate = taskEntry.Timeline.CompletedOn ?? throw new NullReferenceException("Completed date cannot be null.");
+            var formattedDate = AgoFormatter.Format(completedDate);
+
+            return FormatWithAlignment(emoji, title, formattedDate);
         }
     }
 }

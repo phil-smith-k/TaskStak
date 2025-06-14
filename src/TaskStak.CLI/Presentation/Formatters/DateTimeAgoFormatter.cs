@@ -6,6 +6,11 @@
         {
             var timeSpan = DateTime.UtcNow - date;
 
+            if (timeSpan.TotalMinutes < 1)
+            {
+                return "just now";
+            }
+
             if (timeSpan.TotalMinutes < 60)
             {
                 return $"{(int)timeSpan.TotalMinutes}m ago";

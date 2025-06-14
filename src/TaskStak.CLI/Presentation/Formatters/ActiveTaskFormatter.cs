@@ -3,11 +3,15 @@ using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Presentation.Formatters
 {
-    public class ActiveTaskFormatter : ITaskStakFormatter<TaskEntry>
+    public class ActiveTaskFormatter : TaskFormatterBase
     {
-        private static ITaskStakFormatter<DateTime> AgoFormatter => new DateTimeAgoFormatter();
+        public override string Format(TaskEntry taskEntry)
+        {
+            var emoji = Constants.DisplaySymbol.Active;
+            var title = taskEntry.Title;
+            var formattedDate = AgoFormatter.Format(taskEntry.Timeline.CreatedOn);
 
-        public string Format(TaskEntry taskEntry)
-            => $"{Constants.Emojis.Star} {taskEntry.Title} ({AgoFormatter.Format(taskEntry.Timeline.CreatedOn)})";
+            return FormatWithAlignment(emoji, title, formattedDate);
+        }
     }
 }

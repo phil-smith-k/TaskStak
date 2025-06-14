@@ -29,22 +29,23 @@
             }
         }
 
-        public static class Emojis
+        public static class DisplaySymbol
         {
             public const string Success = "\U00002705";     // ✅
             public const string Error = "\U0000274C";       // ❌
             public const string Warning = "\U000026A0";     // ⚠️
             public const string Info = "\U00002139";        // ℹ️
-            public const string Star = "\U00002B50";        // ⭐
+            public const string Active = "*";       
+            public const string Complete = "x";
         }
 
         public static class Messages
         {
-            public const string TaskAdded = $"{Emojis.Success} Task added successfully {Emojis.Success} ";
-            public const string TaskCompleted = $"{Emojis.Success} {{0}} completed successfully {Emojis.Success} ";
-            public const string TaskNotFound = $"{Emojis.Error} Task not found. Please check the title and try again {Emojis.Error}";
-            public const string MultipleTasksFound = $"{Emojis.Warning} Multiple tasks found. Please be more specific {Emojis.Warning}";
-            public const string NoTasksFound = $"{Emojis.Error} No tasks found {Emojis.Error} ";
+            public const string TaskAdded = $"{DisplaySymbol.Success} Task added successfully {DisplaySymbol.Success} ";
+            public const string TaskCompleted = $"{DisplaySymbol.Success} {{0}} completed successfully {DisplaySymbol.Success} ";
+            public const string TaskNotFound = $"{DisplaySymbol.Error} Task not found. Please check the title and try again {DisplaySymbol.Error}";
+            public const string MultipleTasksFound = $"{DisplaySymbol.Warning} Multiple tasks found. Please be more specific {DisplaySymbol.Warning}";
+            public const string NoTasksFound = $"{DisplaySymbol.Error} No tasks found {DisplaySymbol.Error} ";
         }
 
         public static class Options

@@ -26,12 +26,12 @@ namespace TaskStak.CLI.Presentation.Sections
 
         public void RenderHeader()
         {
-            Console.WriteLine($"{this.Title}: ({tasks.Count()})");
+            Console.WriteLine($"{this.Title} ({tasks.Count()})");
         }
 
         public void NoContent()
         {
-            Console.WriteLine($"{Constants.Emojis.Star} Nice work! {Constants.Emojis.Star}");
+            Console.WriteLine($"    {Constants.DisplaySymbol.Active} All caught up! Nice work!");
         }
     }
 }

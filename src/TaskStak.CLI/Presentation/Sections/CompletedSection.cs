@@ -30,16 +30,16 @@ namespace TaskStak.CLI.Presentation.Sections
         {
             if (!this.AnyTasks)
             {
-                Console.WriteLine($"{this.Title}:");
+                Console.WriteLine($"{this.Title}");
                 return;
             }
 
-            Console.WriteLine($"{this.Title}: ({tasks.Count()} {Constants.Emojis.Success})");
+            Console.WriteLine($"{this.Title} ({tasks.Count()})");
         }
 
         public void NoContent()
         {
-            Console.WriteLine($"{Constants.Emojis.Warning} Get to work! {Constants.Emojis.Warning}");
+            Console.WriteLine($"    {Constants.DisplaySymbol.Warning} Nothing completed yet - time to get started!");
         }
     }
 }
