@@ -8,7 +8,11 @@
             this.Timeline = Timeline.Begin();
             this.Status = Flags<TaskEntryStatus>.From(status);
 
-            if (this.IsComplete)
+            if (this.IsBlocked)
+            {
+                this.Block();
+            }
+            else if (this.IsComplete)
             {
                 this.Complete();
             }
@@ -24,7 +28,7 @@
         public bool IsActive
             => this.Status.IsOn(TaskEntryStatus.Active);
 
-        public bool IsImpeded
+        public bool IsBlocked
             => this.Status.IsOn(TaskEntryStatus.Blocked);
 
         public bool IsComplete
@@ -35,8 +39,28 @@
         public void Complete()
         {
             this.Timeline.End();
+            this.Timeline.StatusChangedOn = DateTime.UtcNow;
+
             this.Status.SetTo(TaskEntryStatus.Completed);
         }
-#endregion  
+
+        public void Block()
+        {
+            var now = DateTime.UtcNow;
+            this.Timeline.StatusChangedOn = now;
+            this.Timeline.LastModifiedOn = now;
+
+            this.Status.SetOn(TaskEntryStatus.Blocked);
+        }
+
+        public void Unblock()
+        {
+            var now = DateTime.UtcNow;
+            this.Timeline.StatusChangedOn = now;
+            this.Timeline.LastModifiedOn = now;
+
+            this.Status.SetOff(TaskEntryStatus.Blocked);
+        }
+        #endregion
     }
 }

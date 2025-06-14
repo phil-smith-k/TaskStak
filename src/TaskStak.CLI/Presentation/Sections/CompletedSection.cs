@@ -24,6 +24,8 @@ namespace TaskStak.CLI.Presentation.Sections
             {
                 Console.WriteLine(formatter.Format(task));
             }
+
+            Console.WriteLine();
         }
 
         public void RenderHeader()
@@ -39,7 +41,8 @@ namespace TaskStak.CLI.Presentation.Sections
 
         public void NoContent()
         {
-            Console.WriteLine($"    {Constants.DisplaySymbol.Warning} Nothing completed yet - time to get started!");
+            Console.WriteLine($"    {Constants.DisplaySymbol.Complete} Nothing completed yet - time to get started!");
+            Console.WriteLine();
         }
     }
 }

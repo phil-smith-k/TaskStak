@@ -20,6 +20,7 @@ namespace TaskStak.CLI.Utils
                 CreatedOn = source.CreatedOn,
                 CompletedOn = source.CompletedOn,
                 LastModifiedOn = source.LastModifiedOn,
+                StatusChangedOn = source.StatusChangedOn,
             };
         }
     }

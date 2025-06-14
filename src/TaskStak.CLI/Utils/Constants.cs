@@ -36,6 +36,7 @@
             public const string Warning = "\U000026A0";     // ⚠️
             public const string Info = "\U00002139";        // ℹ️
             public const string Active = "*";       
+            public const string Blocked = "!";
             public const string Complete = "x";
         }
 

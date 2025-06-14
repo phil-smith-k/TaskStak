@@ -1,23 +1,22 @@
 ﻿using TaskStak.CLI.Models;
 using TaskStak.CLI.Presentation.Formatters;
-using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Presentation.Sections
 {
-    public class ActiveTasksSection(IEnumerable<TaskEntry> tasks, ITaskStakFormatter<TaskEntry> formatter) : ISectionView
+    public class BlockedSection(IEnumerable<TaskEntry> tasks, ITaskStakFormatter<TaskEntry> formatter) : ISectionView
     {
-        public string Title => "Active Tasks";
+        public string Title => "Blocked Tasks";
 
         public void Render()
         {
-            this.RenderHeader();
-
             if (!tasks.Any())
             {
                 this.NoContent();
                 return;
             }
 
+            this.RenderHeader();
+            
             foreach (var task in tasks)
             {
                 Console.WriteLine(formatter.Format(task));
@@ -32,9 +31,6 @@ namespace TaskStak.CLI.Presentation.Sections
         }
 
         public void NoContent()
-        {
-            Console.WriteLine($"    {Constants.DisplaySymbol.Active} All caught up! Nice work!");
-            Console.WriteLine();
-        }
+        { }
     }
 }
