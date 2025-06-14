@@ -31,6 +31,8 @@ namespace TaskStak.CLI.Presentation.Sections
         }
 
         public void NoContent()
-        { }
+        {
+            // Don't display blocked section when there are no blocked tasks
+        }
     }
 }
