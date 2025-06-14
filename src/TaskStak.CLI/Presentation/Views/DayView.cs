@@ -1,5 +1,5 @@
-﻿using System.Text;
-using TaskStak.CLI.Models;
+﻿using TaskStak.CLI.Models;
+using TaskStak.CLI.Presentation.Formatters;
 using TaskStak.CLI.Presentation.Sections;
 
 namespace TaskStak.CLI.Presentation.Views
@@ -14,11 +14,15 @@ namespace TaskStak.CLI.Presentation.Views
 
             ISectionView[] sections =
             [
-                new ActiveTasksSection(active),
-                new CompletedSection(complete)
+                new ActiveTasksSection(active, new ActiveTaskFormatter(new DateTimeAgoFormatter())),
+                new CompletedSection(complete, new CompletedTaskFormatter(new DateTimeAgoFormatter()))
             ];
 
-            Array.ForEach(sections, section => section.Render());
+            Array.ForEach(sections, section =>
+            {
+                section.Render();
+                Console.WriteLine();
+            });
         }
 
         private static (List<TaskEntry> Active, List<TaskEntry> Complete) FilterTasks(IEnumerable<TaskEntry> tasks)

@@ -7,5 +7,7 @@
         void Render();
 
         void RenderHeader();
+
+        void NoContent();
     }
 }

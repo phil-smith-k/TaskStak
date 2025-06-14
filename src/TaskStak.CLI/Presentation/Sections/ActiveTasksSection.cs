@@ -1,10 +1,10 @@
-﻿using System.Text;
-using TaskStak.CLI.Models;
-using TaskStak.CLI.Presentation.Views;
+﻿using TaskStak.CLI.Models;
+using TaskStak.CLI.Presentation.Formatters;
+using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Presentation.Sections
 {
-    public class ActiveTasksSection(IEnumerable<TaskEntry> tasks) : ISectionView
+    public class ActiveTasksSection(IEnumerable<TaskEntry> tasks, ITaskStakFormatter<TaskEntry> formatter) : ISectionView
     {
         public string Title => "Active Tasks";
 
@@ -12,21 +12,26 @@ namespace TaskStak.CLI.Presentation.Sections
         {
             this.RenderHeader();
 
-            foreach (var taskEntry in tasks)
+            if (!tasks.Any())
             {
-                Console.WriteLine($"{taskEntry.Id}   {taskEntry.Title} [{taskEntry.Timeline.CreatedOn}]");
+                this.NoContent();
+                return;
+            }
+
+            foreach (var task in tasks)
+            {
+                Console.WriteLine(formatter.Format(task));
             }
         }
 
         public void RenderHeader()
         {
-            StringBuilder builder = new StringBuilder();
+            Console.WriteLine($"{this.Title}: ({tasks.Count()})");
+        }
 
-            builder.AppendLine("------");
-            builder.AppendLine(this.Title);
-            builder.AppendLine("------");
-
-            Console.WriteLine(builder.ToString());
+        public void NoContent()
+        {
+            Console.WriteLine($"{Constants.Emojis.Star} Nice work! {Constants.Emojis.Star}");
         }
     }
 }

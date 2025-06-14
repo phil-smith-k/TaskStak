@@ -29,13 +29,22 @@
             }
         }
 
+        public static class Emojis
+        {
+            public const string Success = "\U00002705";     // ✅
+            public const string Error = "\U0000274C";       // ❌
+            public const string Warning = "\U000026A0";     // ⚠️
+            public const string Info = "\U00002139";        // ℹ️
+            public const string Star = "\U00002B50";        // ⭐
+        }
+
         public static class Messages
         {
-            public const string TaskAdded = "Task added successfully.";
-            public const string TaskCompleted = "{0} completed successfully.";
-            public const string TaskNotFound = "Task not found. Please check the title and try again.";
-            public const string MultipleTasksFound = "Multiple tasks found. Please be more specific.";
-            public const string NoTasksFound = "No tasks found.";
+            public const string TaskAdded = $"{Emojis.Success} Task added successfully {Emojis.Success} ";
+            public const string TaskCompleted = $"{Emojis.Success} {{0}} completed successfully {Emojis.Success} ";
+            public const string TaskNotFound = $"{Emojis.Error} Task not found. Please check the title and try again {Emojis.Error}";
+            public const string MultipleTasksFound = $"{Emojis.Warning} Multiple tasks found. Please be more specific {Emojis.Warning}";
+            public const string NoTasksFound = $"{Emojis.Error} No tasks found {Emojis.Error} ";
         }
 
         public static class Options

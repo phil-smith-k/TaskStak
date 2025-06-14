@@ -38,12 +38,6 @@ namespace TaskStak.CLI.Commands
                 ViewArgument = viewArg,
             };
 
-            if (tasks.Count == 0)
-            {
-                Console.WriteLine(Constants.Messages.NoTasksFound);
-                return;
-            }
-
             var view = ListViewFactory.GetViewFor(options);
             view.Render(tasks);
         }

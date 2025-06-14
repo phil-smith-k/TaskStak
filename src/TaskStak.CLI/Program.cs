@@ -1,5 +1,8 @@
 ﻿using System.CommandLine;
+using TaskStak.CLI;
 using TaskStak.CLI.Commands;
+
+Startup.SetupInterface();
 
 #if DEBUG
     Console.WriteLine("Pausing execution to allow debugger to be attached. Press any key to continue...");

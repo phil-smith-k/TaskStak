@@ -1,32 +1,45 @@
-﻿using System.Text;
-using TaskStak.CLI.Models;
-using TaskStak.CLI.Presentation.Views;
+﻿using TaskStak.CLI.Models;
+using TaskStak.CLI.Presentation.Formatters;
+using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Presentation.Sections
 {
-    public class CompletedSection(IEnumerable<TaskEntry> tasks) : ISectionView
+    public class CompletedSection(IEnumerable<TaskEntry> tasks, ITaskStakFormatter<TaskEntry> formatter) : ISectionView
     {
         public string Title => "Completed Tasks";
+
+        private bool AnyTasks => tasks.Any();
 
         public void Render()
         {
             this.RenderHeader();
 
-            foreach (var taskEntry in tasks)
+            if (!this.AnyTasks)
             {
-                Console.WriteLine($"{taskEntry.Id}   {taskEntry.Title} [{taskEntry.Timeline.CompletedOn}]");
+                this.NoContent();
+                return;
+            }
+
+            foreach (var task in tasks)
+            {
+                Console.WriteLine(formatter.Format(task));
             }
         }
 
         public void RenderHeader()
         {
-            StringBuilder builder = new StringBuilder();
+            if (!this.AnyTasks)
+            {
+                Console.WriteLine($"{this.Title}:");
+                return;
+            }
 
-            builder.AppendLine("------");
-            builder.AppendLine(this.Title);
-            builder.AppendLine("------");
+            Console.WriteLine($"{this.Title}: ({tasks.Count()} {Constants.Emojis.Success})");
+        }
 
-            Console.WriteLine(builder.ToString());
+        public void NoContent()
+        {
+            Console.WriteLine($"{Constants.Emojis.Warning} Get to work! {Constants.Emojis.Warning}");
         }
     }
 }
