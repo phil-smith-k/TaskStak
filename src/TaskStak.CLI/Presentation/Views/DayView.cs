@@ -14,8 +14,8 @@ namespace TaskStak.CLI.Presentation.Views
 
             ISectionView[] sections =
             [
-                new ActiveTasksSection(active, new ActiveTaskFormatter(new DateTimeAgoFormatter())),
-                new CompletedSection(complete, new CompletedTaskFormatter(new DateTimeAgoFormatter()))
+                new ActiveTasksSection(active, new ActiveTaskFormatter()),
+                new CompletedSection(complete, new CompletedTaskFormatter())
             ];
 
             Array.ForEach(sections, section =>
