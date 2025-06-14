@@ -10,7 +10,7 @@ namespace TaskStak.CLI.Presentation.Views
 
             return options.ViewArgument switch
             {
-                _ => new DefaultListView(options)
+                _ => new DayView(options)
             };
         }
     }

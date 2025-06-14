@@ -2,7 +2,7 @@
 
 namespace TaskStak.CLI.Presentation.Views
 {
-    public class DefaultListView(ListOptions options) : IListView
+    public class DayView(ListOptions options) : IListView
     {
         private readonly ListOptions _options = options;
 
