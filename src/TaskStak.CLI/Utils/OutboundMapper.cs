@@ -6,13 +6,15 @@ namespace TaskStak.CLI.Utils
     {
         public static TaskEntry Map(Persistence.Models.TaskEntry source)
         {
-            return new TaskEntry
+            var task = new TaskEntry
             {
                 Id = EntityId.Parse(source.Id),
-                Status = Flags<TaskEntryStatus>.From(source.Status),
-                Timeline = Map(source.Timeline!),
+                Timeline = Map(source.Timeline),
                 Title = source.Title,
             };
+
+            task.SetStatusTo((TaskEntryStatus)source.Status);
+            return task;
         }
 
         public static Timeline Map(Persistence.Models.Timeline source)
@@ -22,7 +24,6 @@ namespace TaskStak.CLI.Utils
                 CreatedOn = source.CreatedOn,
                 CompletedOn = source.CompletedOn,
                 LastModifiedOn = source.LastModifiedOn,
-                StatusChangedOn = source.StatusChangedOn,
             };
         }
     }

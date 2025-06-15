@@ -30,15 +30,15 @@ namespace TaskStak.CLI.Presentation.Views
 
             foreach (var task in tasks)
             {
-                if (task.Status.Is(TaskEntryStatus.Active))
+                if (task.IsActive)
                 {
                     active.Add(task);
                 }
-                else if (task.Status.Is(TaskEntryStatus.Active | TaskEntryStatus.Blocked))
+                else if (task.IsBlocked)
                 {
                     blocked.Add(task);
                 }
-                else if (task.Status.Is(TaskEntryStatus.Completed))
+                else if (task.IsCompleted)
                 {
                     completed.Add(task);
                 }

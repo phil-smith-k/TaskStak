@@ -9,8 +9,8 @@ namespace TaskStak.CLI.Presentation.Formatters
         {
             var symbol = Constants.DisplaySymbol.Blocked;
             var title = task.Title;
-            
-            var statusChangedOn = task.Timeline.StatusChangedOn ?? throw new NullReferenceException("Status changed date cannot be null.");
+
+            var statusChangedOn = task.Timeline.LastModifiedOn ?? task.Timeline.CreatedOn;
             var formattedDate = AgoFormatter.Format(statusChangedOn);
 
             return FormatWithAlignment(symbol, title, formattedDate);

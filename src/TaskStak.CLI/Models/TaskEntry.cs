@@ -3,7 +3,7 @@
     public class TaskEntry : EntityRoot
     {
         #region Properties
-        public Flags<TaskEntryStatus> Status { get; set; } = Flags<TaskEntryStatus>.From(TaskEntryStatus.Active);
+        public Flags<TaskEntryStatus> Status { get; private set; } = Flags<TaskEntryStatus>.From(TaskEntryStatus.Active);
 
         public Timeline Timeline { get; set; } = Timeline.Begin();
 
@@ -15,53 +15,38 @@
         public bool IsBlocked
             => this.Status.IsOn(TaskEntryStatus.Blocked);
 
-        public bool IsComplete
+        public bool IsCompleted
             => this.Status.IsOn(TaskEntryStatus.Completed);
         #endregion
 
         #region Public Methods
         public void Block()
         {
-            if (!this.IsActive)
-                throw new InvalidOperationException("Cannot block an inactive task.");
+            if (this.IsBlocked)
+                throw new InvalidOperationException("Cannot block an already blocked task.");
 
-            var now = DateTime.UtcNow;
-
-            this.Timeline.StatusChangedOn = now;
-            this.Timeline.LastModifiedOn = now;
-
-            this.Status.SetOn(TaskEntryStatus.Blocked);
+            this.Timeline.LastModifiedOn = DateTime.UtcNow; 
+            this.Status.SetTo(TaskEntryStatus.Blocked);
         }
 
         public void Complete()
         {
-            if (this.IsComplete)
-                throw new InvalidOperationException("Cannot complete a completed task.");
+            if (this.IsCompleted)
+                throw new InvalidOperationException("Cannot complete an already completed task.");
 
-            var now = DateTime.UtcNow;
-
-            this.Timeline.CompletedOn = now;
-            this.Timeline.StatusChangedOn = now;
-
+            this.Timeline.CompletedOn = DateTime.UtcNow;
             this.Status.SetTo(TaskEntryStatus.Completed);
         }
 
-        public void SetStatusTo(TaskEntryStatus status)
+        public void EditStatus(TaskEntryStatus status)
         {
             if (this.Status.Is(status))
                 return;
 
-            var now = DateTime.UtcNow;
-            var completing = status == TaskEntryStatus.Completed;
-            var isComplete = this.IsComplete;
+            var isComplete = this.IsCompleted;
+            var completing = status == TaskEntryStatus.Completed && !isComplete;
 
-            if (status == TaskEntryStatus.Blocked)
-            {
-                this.Block();
-                return;
-            }
-
-            if (completing && !isComplete)
+            if (completing)
             {
                 this.Complete();
                 return;
@@ -72,22 +57,25 @@
                 this.Timeline.CompletedOn = null;
             }
 
+            this.Timeline.LastModifiedOn = DateTime.UtcNow;
             this.Status.SetTo(status);
-            this.Timeline.StatusChangedOn = now;
-            this.Timeline.LastModifiedOn = now;
         }
+
+        public void SetStatusTo(TaskEntryStatus status)
+        {
+            if (this.Status.Is(status))
+                return;
+
+            this.Status.SetTo(status);
+        }   
 
         public void Unblock()
         {
             if (!this.IsBlocked)
                 throw new InvalidOperationException("Cannot unblock an unblocked task.");
 
-            var now = DateTime.UtcNow;
-
-            this.Timeline.StatusChangedOn = now;
-            this.Timeline.LastModifiedOn = now;
-
-            this.Status.SetOff(TaskEntryStatus.Blocked);
+            this.Timeline.LastModifiedOn = DateTime.UtcNow;
+            this.Status.SetTo(TaskEntryStatus.Active);
         }
         #endregion
 
@@ -99,7 +87,7 @@
                 Title = title 
             };
 
-            task.SetStatusTo(status);
+            task.EditStatus(status);
             return task;
         }
         #endregion

@@ -8,6 +8,6 @@
 
         public required string Title { get; set; }
 
-        public Timeline? Timeline { get; set; }
+        public required Timeline Timeline { get; set; }
     }
 }

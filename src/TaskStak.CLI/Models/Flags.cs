@@ -60,6 +60,26 @@
             => this.Value.HasFlag(flag);
 
         /// <summary>
+        /// Converts the specified <see cref="Flags{TFlag}"/> instance to an integer representation.
+        /// </summary>
+        /// <param name="flags">The <see cref="Flags{TFlag}"/> instance to convert.</param>
+        public static implicit operator int(Flags<TFlag> flags)
+        {
+            return Convert.ToInt32(flags.Value);
+        }
+
+        /// <summary>
+        /// Converts an integer value to a <see cref="Flags{TFlag}"/> instance.
+        /// </summary>
+        /// <param name="value">The integer value to convert to the corresponding flag enumeration.</param>
+        public static explicit operator Flags<TFlag>(int value)
+        {
+            var enumValue = (TFlag)Enum.ToObject(typeof(TFlag), value);
+
+            return From(enumValue);
+        }
+
+        /// <summary>
         /// Disables the specified flag in the current flag value.
         /// </summary>
         /// <remarks>This method removes the specified flag from the current value by performing a bitwise
