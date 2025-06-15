@@ -15,11 +15,7 @@ namespace TaskStak.CLI.Commands
 
         public static Command Create()
         {
-            var queryArg = new Argument<string[]>(Constants.Arguments.Query, Constants.Arguments.Descriptions.QueryDesc)
-            {
-                Arity = ArgumentArity.OneOrMore
-            };
-
+            var queryArg = new Argument<string>(Constants.Arguments.Query, Constants.Arguments.Descriptions.QueryDesc);
             var command = new Command(Name, Description)
             {
                 queryArg,
@@ -30,12 +26,12 @@ namespace TaskStak.CLI.Commands
             return command;
         }
 
-        public static void Execute(string[] queryArg)
+        public static void Execute(string queryArg)
         {
             var tasks = JsonHelper.LoadTasks();
             var results = _searchService.Search(tasks, new TaskSearchCriteria
             {
-                Query = string.Join(" ", queryArg),
+                Query = queryArg,
                 StatusFlags = TaskEntryStatus.Active | TaskEntryStatus.Blocked,
             });
 

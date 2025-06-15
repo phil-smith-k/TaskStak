@@ -12,10 +12,7 @@ namespace TaskStak.CLI.Commands
 
         public static Command Create()
         {
-            var titleArg = new Argument<string[]>(Constants.Arguments.Title, Constants.Arguments.Descriptions.TitleDesc)
-            {
-                Arity = ArgumentArity.OneOrMore
-            };
+            var titleArg = new Argument<string>(Constants.Arguments.Title, Constants.Arguments.Descriptions.TitleDesc);
             var statusOption = new Option<TaskEntryStatus>(
                 aliases: [Constants.Options.Status, Constants.Options.StatusAlias], 
                 parseArgument: ParseArgument,
@@ -33,18 +30,16 @@ namespace TaskStak.CLI.Commands
             return command;
         }
 
-        public static void Execute(string[] titleArgs, TaskEntryStatus status)
+        public static void Execute(string titleArg, TaskEntryStatus status)
         {
-            var title = string.Join(" ", titleArgs);
             var tasks = JsonHelper.LoadTasks();
 
-            var task = TaskEntry.New(title, status);
-
+            var task = TaskEntry.New(titleArg, status);
             tasks.Add(task);
 
             JsonHelper.SaveTasks(tasks);
 
-            Console.WriteLine(Constants.Messages.TaskAdded);
+            Console.WriteLine(Constants.Messages.TaskAdded, titleArg);
         }
 
         private static TaskEntryStatus ParseArgument(ArgumentResult argResult)
