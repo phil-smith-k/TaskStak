@@ -11,6 +11,28 @@ namespace TaskStak.CLI.Presentation.Formatters
 
         public abstract string Format(TaskEntry item);
 
+        protected static string FormatWithAlignment(string symbol, string id, string title, string formattedDate)
+        {
+            var maxWidth = Math.Min(GetSafeTerminalWidth(), MAX_FORMATTED_WIDTH);
+
+            var maxTitleLength = maxWidth 
+                              - symbol.Length 
+                              - id.Length
+                              - title.Length 
+                              - formattedDate.Length 
+                              - 1  // 1 space before id 
+                              - 1  // 1 space before title
+                              - 1; // 1 space before date
+
+            if (title.Length > maxTitleLength)
+            {
+                title = TruncateTitle(title, maxTitleLength);
+            }
+
+            var padding = maxWidth - symbol.Length - id.Length - title.Length - formattedDate.Length - 2; // 2 for spaces before id and title
+            return $"{symbol} {id} {title}{new string(' ', Math.Max(1, padding))}{formattedDate}";
+        }
+
         protected static string FormatWithAlignment(string symbol, string title, string formattedDate)
         {
             var maxWidth = Math.Min(GetSafeTerminalWidth(), MAX_FORMATTED_WIDTH);

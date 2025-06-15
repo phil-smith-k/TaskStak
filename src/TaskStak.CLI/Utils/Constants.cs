@@ -42,11 +42,11 @@
 
         public static class Messages
         {
-            public const string TaskAdded = $"{DisplaySymbol.Success} Task added successfully {DisplaySymbol.Success} ";
-            public const string TaskCompleted = $"{DisplaySymbol.Success} {{0}} completed successfully {DisplaySymbol.Success} ";
-            public const string TaskNotFound = $"{DisplaySymbol.Error} Task not found. Please check the title and try again {DisplaySymbol.Error}";
-            public const string MultipleTasksFound = $"{DisplaySymbol.Warning} Multiple tasks found. Please be more specific {DisplaySymbol.Warning}";
-            public const string NoTasksFound = $"{DisplaySymbol.Error} No tasks found {DisplaySymbol.Error} ";
+            public const string TaskAdded = $"{DisplaySymbol.Success} Task added successfully.";
+            public const string TaskCompleted = $"{DisplaySymbol.Success} {{0}} completed successfully.";
+            public const string TaskNotFound = $"{DisplaySymbol.Error} Task not found. Please check the title and try again";
+            public const string MultipleTasksFound = $"{DisplaySymbol.Warning} Multiple tasks found. Please be more specific...";
+            public const string NoTasksFound = $"{DisplaySymbol.Error} No tasks found.";
         }
 
         public static class Options

@@ -45,7 +45,7 @@
         public static bool operator !=(EntityId a, EntityId b) 
             => !a.Equals(b);
 
-        private static bool TryParse(string value, out EntityId result)
+        public static bool TryParse(string value, out EntityId result)
         {
             result = default;
 

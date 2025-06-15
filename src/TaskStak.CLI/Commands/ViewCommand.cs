@@ -13,6 +13,7 @@ namespace TaskStak.CLI.Commands
 
         public static Command Create()
         {
+            // TODO: Use options rather than arguments
             var viewArg = new Argument<ViewArgument>(
                 name: Constants.Arguments.View, 
                 isDefault: true,
