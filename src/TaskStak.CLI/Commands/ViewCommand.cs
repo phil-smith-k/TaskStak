@@ -13,39 +13,37 @@ namespace TaskStak.CLI.Commands
 
         public static Command Create()
         {
-            // TODO: Use options rather than arguments
-            var viewArg = new Argument<ViewArgument>(
-                name: Constants.Arguments.View, 
+            var viewOption = new Option<ViewOption>(
+                aliases: [Constants.Options.View, Constants.Options.ViewAlias], 
+                parseArgument: ParseViewArgument,
                 isDefault: true,
-                parse: ParseViewArgument,
-                description: Constants.Arguments.Descriptions.ViewDesc);
+                description: Constants.Options.Descriptions.ViewDesc);
 
             var command = new Command(Name, Description)
             {
-                viewArg,
+                viewOption,
             };
 
-            command.AddAlias(Constants.Commands.ViewAlias);
-            command.SetHandler(Execute, viewArg);
+            command.SetHandler(Execute, viewOption);
 
             return command;
         }
 
-        public static void Execute(ViewArgument viewArg)
+        public static void Execute(ViewOption viewArg)
         {
             var tasks = JsonHelper.LoadTasks();
             var options = new ListOptions
             {
-                ViewArgument = viewArg,
+                ViewOption = viewArg,
             };
 
             var view = ListViewFactory.GetViewFor(options);
             view.Render(tasks);
         }
 
-        private static ViewArgument ParseViewArgument(ArgumentResult argResult)
+        private static ViewOption ParseViewArgument(ArgumentResult argResult)
         {
-            ViewArgument result = default;
+            ViewOption result = default;
             var arg = argResult.Tokens.SingleOrDefault()?.Value;
 
             if (string.IsNullOrWhiteSpace(arg))
@@ -57,8 +55,8 @@ namespace TaskStak.CLI.Commands
 
             result = arg.ToLowerInvariant() switch
             {
-                "d" => ViewArgument.Day,
-                "w" => ViewArgument.Week,
+                "d" => ViewOption.Day,
+                "w" => ViewOption.Week,
 
                 _ => throw new ArgumentException($"Invalid view argument '{arg}'. Run task --help to see view argument options."),
             };

@@ -15,27 +15,27 @@ namespace TaskStak.CLI.Commands
 
         public static Command Create()
         {
-            var titleArg = new Argument<string[]>(Constants.Arguments.Title, Constants.Arguments.Descriptions.TitleDesc)
+            var queryArg = new Argument<string[]>(Constants.Arguments.Query, Constants.Arguments.Descriptions.QueryDesc)
             {
                 Arity = ArgumentArity.OneOrMore
             };
 
             var command = new Command(Name, Description)
             {
-                titleArg,
+                queryArg,
             };
 
-            command.SetHandler(Execute, titleArg);
+            command.SetHandler(Execute, queryArg);
 
             return command;
         }
 
-        public static void Execute(string[] searchArgs)
+        public static void Execute(string[] queryArg)
         {
             var tasks = JsonHelper.LoadTasks();
             var results = _searchService.Search(tasks, new TaskSearchCriteria
             {
-                Query = string.Join(" ", searchArgs),
+                Query = string.Join(" ", queryArg),
                 StatusFlags = TaskEntryStatus.Active | TaskEntryStatus.Blocked,
             });
 
@@ -52,7 +52,7 @@ namespace TaskStak.CLI.Commands
             {
                 Console.WriteLine(Constants.Messages.MultipleTasksFound);
 
-                var view = ListViewFactory.GetViewFor(ViewArgument.Verbose);
+                var view = ListViewFactory.GetViewFor(ViewOption.Verbose);
                 view.Render(results.Candidates);
             }
             else if (results.NoResults)

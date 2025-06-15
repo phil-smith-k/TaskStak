@@ -8,18 +8,18 @@ namespace TaskStak.CLI.Presentation.Views
         {
             options ??= new ListOptions(); 
 
-            return options.ViewArgument switch
+            return options.ViewOption switch
             {
-                ViewArgument.Day => new DayView(options),
-                ViewArgument.Verbose => new VerboseView(options),
+                ViewOption.Day => new DayView(options),
+                ViewOption.Verbose => new VerboseView(options),
 
                 _ => new DayView(options),
             };
         }
 
-        public static IListView GetViewFor(ViewArgument arg)
+        public static IListView GetViewFor(ViewOption arg)
         {
-            var options = new ListOptions { ViewArgument = arg };
+            var options = new ListOptions { ViewOption = arg };
 
             return GetViewFor(options);
         }

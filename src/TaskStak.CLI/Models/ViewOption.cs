@@ -1,6 +1,6 @@
 ﻿namespace TaskStak.CLI.Models
 {
-    public enum ViewArgument
+    public enum ViewOption
     {
         Day = 0,
         Week = 1,

@@ -2,6 +2,6 @@
 {
     public class ListOptions
     {
-        public ViewArgument ViewArgument { get; set; } 
+        public ViewOption ViewOption { get; set; } 
     }
 }

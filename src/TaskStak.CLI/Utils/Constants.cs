@@ -4,13 +4,13 @@
     {
         public static class Arguments
         {
+            public const string Query = "query";
             public const string Title = "title";
-            public const string View = "view";
 
             public static class Descriptions
             {
+                public const string QueryDesc = "Search query argument. Use id or title of task.";
                 public const string TitleDesc = "The title of the task.";
-                public const string ViewDesc = "The specific view to use for listing tasks. Defaults to 'Day'.";
             }
         }
 
@@ -19,7 +19,6 @@
             public const string Add = "add";
             public const string Done = "done";
             public const string View = "view";
-            public const string ViewAlias = "v";
 
             public static class Descriptions
             {
@@ -44,7 +43,6 @@
         {
             public const string TaskAdded = $"{DisplaySymbol.Success} Task added successfully.";
             public const string TaskCompleted = $"{DisplaySymbol.Success} {{0}} completed successfully.";
-            public const string TaskNotFound = $"{DisplaySymbol.Error} Task not found. Please check the title and try again";
             public const string MultipleTasksFound = $"{DisplaySymbol.Warning} Multiple tasks found. Please be more specific...";
             public const string NoTasksFound = $"{DisplaySymbol.Error} No tasks found.";
         }
@@ -53,10 +51,13 @@
         {
             public const string Status = "--status";
             public const string StatusAlias = "-s";
+            public const string View = "--view";
+            public const string ViewAlias = "-v";
 
             public static class Descriptions
             {
                 public const string StatusDesc = "The status of the task to add. Defaults to 'Active'.";
+                public const string ViewDesc = "The view to use when listing tasks. Defaults to 'Day'. Case insensitive. First letter abberviation accepted (ex. 'task view -v w' for 'Week')";
             }
         }
     }
