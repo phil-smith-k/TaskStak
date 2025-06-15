@@ -6,10 +6,12 @@ namespace TaskStak.CLI.Utils
     {
         public static TaskEntry Map(Persistence.Models.TaskEntry source)
         {
-            return new TaskEntry(source.Title, (TaskEntryStatus)source.Status)
+            return new TaskEntry
             {
                 Id = EntityId.Parse(source.Id),
+                Status = Flags<TaskEntryStatus>.From(source.Status),
                 Timeline = Map(source.Timeline!),
+                Title = source.Title,
             };
         }
 

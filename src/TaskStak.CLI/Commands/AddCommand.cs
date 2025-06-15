@@ -38,7 +38,10 @@ namespace TaskStak.CLI.Commands
             var title = string.Join(" ", titleArgs);
             var tasks = JsonHelper.LoadTasks();
 
-            tasks.Add(new TaskEntry(title, status));
+            var task = TaskEntry.New(title, status);
+
+            tasks.Add(task);
+
             JsonHelper.SaveTasks(tasks);
 
             Console.WriteLine(Constants.Messages.TaskAdded);
@@ -46,7 +49,7 @@ namespace TaskStak.CLI.Commands
 
         private static TaskEntryStatus ParseArgument(ArgumentResult argResult)
         {
-            TaskEntryStatus result = TaskEntryStatus.Active;
+            var result = TaskEntryStatus.Active;
             var arg = argResult.Tokens.SingleOrDefault()?.Value;
 
             if (string.IsNullOrWhiteSpace(arg))
@@ -59,10 +62,10 @@ namespace TaskStak.CLI.Commands
             result = arg.ToLowerInvariant() switch
             {
                 "a" => TaskEntryStatus.Active,
-                "b" => TaskEntryStatus.Blocked,
+                "b" => TaskEntryStatus.Blocked, 
                 "c" => TaskEntryStatus.Completed,
 
-                _ => throw new ArgumentException($"Invalid view argument '{arg}'. Run task --help to see view argument options."),
+                _ => throw new ArgumentException($"Invalid status option '{arg}'. Run task --help to see status options."),
             };
 
             return result;

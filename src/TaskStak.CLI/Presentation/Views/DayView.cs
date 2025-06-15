@@ -10,7 +10,7 @@ namespace TaskStak.CLI.Presentation.Views
 
         public void Render(IEnumerable<TaskEntry> tasks)
         {
-            var (active, blocked, complete) = FilterTasks(tasks);
+            var (active, blocked, complete) = GroupByStatus(tasks);
 
             ISectionView[] sections =
             [
@@ -22,23 +22,29 @@ namespace TaskStak.CLI.Presentation.Views
             Array.ForEach(sections, section => section.Render());
         }
 
-        private static (List<TaskEntry> Active, List<TaskEntry> Blocked, List<TaskEntry> Complete) FilterTasks(IEnumerable<TaskEntry> tasks)
+        private static (List<TaskEntry> Active, List<TaskEntry> Blocked, List<TaskEntry> Completed) GroupByStatus(IEnumerable<TaskEntry> tasks)
         {
             var active = new List<TaskEntry>();
             var blocked = new List<TaskEntry>();
-            var complete = new List<TaskEntry>();
+            var completed = new List<TaskEntry>();
 
             foreach (var task in tasks)
             {
-                if (task.IsActive)
+                if (task.Status.Is(TaskEntryStatus.Active))
+                {
                     active.Add(task);
-                else if (task.IsBlocked)
+                }
+                else if (task.Status.Is(TaskEntryStatus.Active | TaskEntryStatus.Blocked))
+                {
                     blocked.Add(task);
-                else if (task.IsComplete)
-                    complete.Add(task);
+                }
+                else if (task.Status.Is(TaskEntryStatus.Completed))
+                {
+                    completed.Add(task);
+                }
             }
 
-            return (active, blocked, complete);
+            return (active, blocked, completed);
         }
     }
 }
