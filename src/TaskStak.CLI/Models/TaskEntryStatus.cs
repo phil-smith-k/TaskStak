@@ -2,9 +2,11 @@
 {
     [Flags]
     public enum TaskEntryStatus
-    {
-        Active          = 1 << 0,
-        Blocked         = 1 << 1, 
-        Completed       = 1 << 2,
+    {                                                  // (Binary, Decimal)
+        Active          = 1 << 0,                      // (001,          1)
+        Blocked         = 1 << 1,                      // (010,          2)
+        Completed       = 1 << 2,                      // (100,          4)
+                                                                          
+        All             = Active | Blocked | Completed // (111,          7)
     }
 }

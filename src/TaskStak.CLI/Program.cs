@@ -13,6 +13,7 @@ var rootCommand = new RootCommand("TaskStak - A developer-focused, performant ta
 {
     AddCommand.Create(),
     DoneCommand.Create(),
+    TitleCommand.Create(),
     ViewCommand.Create(),
 };
 

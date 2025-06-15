@@ -10,7 +10,7 @@
             public static class Descriptions
             {
                 public const string QueryDesc = "Search query argument. Use id or title of task.";
-                public const string TitleDesc = "The title of the task.";
+                public const string TitleDesc = "The title of the new or updated task.";
             }
         }
 
@@ -18,12 +18,14 @@
         {
             public const string Add = "add";
             public const string Done = "done";
+            public const string Title = "title";
             public const string View = "view";
 
             public static class Descriptions
             {
                 public const string AddDesc = "Add a task to your stak.";
                 public const string DoneDesc = "Mark a task complete.";
+                public const string TitleDesc = "Update the title of an existing task.";
                 public const string ViewDesc = "View current tasks in stak.";
             }
         }
@@ -41,9 +43,10 @@
 
         public static class Messages
         {
-            public const string TaskAdded = $"{DisplaySymbol.Success} Task added successfully.";
-            public const string TaskCompleted = $"{DisplaySymbol.Success} {{0}} completed successfully.";
-            public const string MultipleTasksFound = $"{DisplaySymbol.Warning} Multiple tasks found. Please be more specific...";
+            public const string TaskAdded = $"{DisplaySymbol.Success} '{{0}}' added successfully.";
+            public const string TaskCompleted = $"{DisplaySymbol.Success} '{{0}}' completed successfully.";
+            public const string TitleUpdated = $"{DisplaySymbol.Success} Title updated from '{{0}}' to '{{1}}'";
+            public const string MultipleTasksFound = $"{DisplaySymbol.Warning} Multiple tasks found. Please be more specific.";
             public const string NoTasksFound = $"{DisplaySymbol.Error} No tasks found.";
         }
 
