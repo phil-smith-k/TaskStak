@@ -15,7 +15,7 @@ namespace TaskStak.CLI.Commands
         {
             var viewOption = new Option<ViewOption>(
                 aliases: [Constants.Options.View, Constants.Options.ViewAlias], 
-                parseArgument: ParseViewArgument,
+                parseArgument: ParseViewOption,
                 isDefault: true,
                 description: Constants.Options.Descriptions.ViewDesc);
 
@@ -41,7 +41,7 @@ namespace TaskStak.CLI.Commands
             view.Render(tasks);
         }
 
-        private static ViewOption ParseViewArgument(ArgumentResult argResult)
+        private static ViewOption ParseViewOption(ArgumentResult argResult)
         {
             ViewOption result = default;
             var arg = argResult.Tokens.SingleOrDefault()?.Value;
@@ -57,6 +57,8 @@ namespace TaskStak.CLI.Commands
             {
                 "d" => ViewOption.Day,
                 "w" => ViewOption.Week,
+                "m" => ViewOption.Month,
+                "v" => ViewOption.Verbose,
 
                 _ => throw new ArgumentException($"Invalid view argument '{arg}'. Run task --help to see view argument options."),
             };
