@@ -12,7 +12,7 @@ namespace TaskStak.CLI.Commands
 
         public static Command Create()
         {
-            var titleArg = new Argument<string[]>(Constants.Arguments.Query, Constants.Arguments.Descriptions.QueryDesc)
+            var titleArg = new Argument<string[]>(Constants.Arguments.Title, Constants.Arguments.Descriptions.TitleDesc)
             {
                 Arity = ArgumentArity.OneOrMore
             };
