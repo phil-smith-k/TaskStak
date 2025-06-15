@@ -46,7 +46,7 @@ namespace TaskStak.CLI.Commands
                 task.Title = titleArg;
                 JsonHelper.SaveTasks(tasks);
 
-                Console.WriteLine(Constants.Messages.TitleUpdated, original, titleArg);
+                Console.WriteLine(Constants.Messages.TaskUpdated, nameof(task.Title).ToLowerInvariant(), original, titleArg);
             }
             else if (results.CandidatesFound)
             {

@@ -2,7 +2,7 @@
 {
     public class SearchResult<T> where T : EntityRoot
     {
-        public T? Entity { get; init; }
+        public T? Entity { private get; init; }
 
         public List<T> Candidates { get; init; } = [];
 

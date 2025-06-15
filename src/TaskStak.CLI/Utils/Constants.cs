@@ -18,6 +18,7 @@
         {
             public const string Add = "add";
             public const string Done = "done";
+            public const string Move = "move";
             public const string Title = "title";
             public const string View = "view";
 
@@ -25,6 +26,7 @@
             {
                 public const string AddDesc = "Add a task to your stak.";
                 public const string DoneDesc = "Mark a task complete.";
+                public const string MoveDesc = "Move a task to a different status.";
                 public const string TitleDesc = "Update the title of an existing task.";
                 public const string ViewDesc = "View current tasks in stak.";
             }
@@ -45,7 +47,7 @@
         {
             public const string TaskAdded = $"{DisplaySymbol.Success} '{{0}}' added successfully.";
             public const string TaskCompleted = $"{DisplaySymbol.Success} '{{0}}' completed successfully.";
-            public const string TitleUpdated = $"{DisplaySymbol.Success} Title updated from '{{0}}' to '{{1}}'";
+            public const string TaskUpdated = $"{DisplaySymbol.Success} Task {{0}} updated from '{{1}}' to '{{2}}'";
             public const string MultipleTasksFound = $"{DisplaySymbol.Warning} Multiple tasks found. Please be more specific.";
             public const string NoTasksFound = $"{DisplaySymbol.Error} No tasks found.";
         }
