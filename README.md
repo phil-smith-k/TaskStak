@@ -21,7 +21,7 @@ add <title> [-s|--status <active | blocked | completed>]
 #### Done
 Mark a task complete.
 ```
-done  <query>
+done <query>
 ```
 
 #### Move
@@ -33,7 +33,7 @@ move <query> [-s|--status <active | blocked | completed>]
 #### Title
 Update the title of an existing task.
 ```
-title <query> <title>
+title <query> <newTitle>
 ```
 
 #### View
@@ -42,44 +42,22 @@ View your tasks
 view [-v|--view <day | verbose>]     
 ```
 
-```bash
-# Add a new task
-task add "implement user authentication"
-
-# View tasks
-task view
-
-# Complete a task
-task done "auth"
-
-# Edit task title
-task title "auth" "implement OAuth2 authentication"
-
-# Move task to different status
-task move "auth" -s blocked
-task move "auth" -s completed
-```
-
 ### Task Status
 
 Tasks fall into one of three states:
-| Status        | Default       | Usage                            | Shortcut    |
-| ------------- | ------------- | ---------------------------------|-------------|
-| `active`      | YES           | Current work                     | `a`         |
-| `blocked`     | NO            | Impeded, waiting on dependencies | `b`         |
-| `completed`   | NO            | Finished work                    | `c`         |
-
+1. `active` or `a` - current work (default) 
+2. `blocked` or `b` - impeded; waiting on dependencies 
+3. `completed` or `c` - finished work 
 
 ```bash
-# Shortcut Usage (moves task to blocked status)
-
+# Shortcut usage (moves task to blocked status)
 task move "fix bug in auth service" -s b
 ```
 
 ### View Options
 
-#### Daily View
-Default view:
+#### Daily View (default):
+Displays tasks in three sections; active, blocked (if any), and completed
 
 ```
 task view 
@@ -87,7 +65,8 @@ task view -v day
 task view -v d
 ```
 
-Verbose view:
+#### Verbose view:
+Displays more information (key, title, exact date/time)
 ```
 task view -v v
 task view -v verbose
