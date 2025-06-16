@@ -1,15 +1,11 @@
 ﻿using System.CommandLine;
 using TaskStak.CLI.Models;
-using TaskStak.CLI.Presentation.Views;
-using TaskStak.CLI.Services;
 using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Commands
 {
     public class DoneCommand : ITaskStakCommand
     {
-        private static readonly ISearchService<TaskEntry> _searchService = new TaskSearchService();
-
         public static string Name => Constants.Commands.Done;
         public static string Description => Constants.Commands.Descriptions.DoneDesc;
 
@@ -22,39 +18,25 @@ namespace TaskStak.CLI.Commands
             };
 
             command.SetHandler(Execute, queryArg);
-
             return command;
         }
 
         public static void Execute(string queryArg)
         {
-            var tasks = JsonHelper.LoadTasks();
-            var results = _searchService.Search(tasks, new TaskSearchCriteria
-            {
-                Query = queryArg,
-                StatusFlags = TaskEntryStatus.Active | TaskEntryStatus.Blocked,
-            });
+            var criteria = new TaskSearchCriteria { Query = queryArg };
+            var searchCommand = new TaskSearchCommand();
 
-            if (results.EntityFound)
-            {
-                var task = results.GetEntity();
+            searchCommand
+                .WithCriteria(criteria)
+                .OnTaskFound((tasks, task) =>
+                {
+                    task.Complete();
+                    JsonHelper.SaveTasks(tasks);
 
-                task.Complete();
-                JsonHelper.SaveTasks(tasks);
+                    Console.WriteLine(Constants.Messages.TaskCompleted, task.Title);
+                });
 
-                Console.WriteLine(Constants.Messages.TaskCompleted, task.Title);
-            }
-            else if (results.CandidatesFound)
-            {
-                Console.WriteLine(Constants.Messages.MultipleTasksFound);
-
-                var view = ListViewFactory.GetViewFor(ViewOption.Verbose);
-                view.Render(results.Candidates);
-            }
-            else if (results.NoResults)
-            {
-                Console.WriteLine(Constants.Messages.NoTasksFound);
-            }
+            searchCommand.Execute();
         }
     }
 }

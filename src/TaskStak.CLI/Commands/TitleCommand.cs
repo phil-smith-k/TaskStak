@@ -1,15 +1,11 @@
 ﻿using System.CommandLine;
 using TaskStak.CLI.Models;
-using TaskStak.CLI.Presentation.Views;
-using TaskStak.CLI.Services;
 using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Commands
 {
     public class TitleCommand : ITaskStakCommand
     {
-        private static readonly ISearchService<TaskEntry> _searchService = new TaskSearchService();
-
         public static string Name => Constants.Commands.Title;
         public static string Description => Constants.Commands.Descriptions.TitleDesc;
 
@@ -25,40 +21,31 @@ namespace TaskStak.CLI.Commands
             };
 
             command.SetHandler(Execute, queryArg, titleArg);
-
             return command;
         }
 
         public static void Execute(string queryArg, string titleArg)
         {
-            var tasks = JsonHelper.LoadTasks();
-            var results = _searchService.Search(tasks, new TaskSearchCriteria
+            var command = new TaskSearchCommand();
+            var criteria = new TaskSearchCriteria
             {
                 Query = queryArg,
                 StatusFlags = TaskEntryStatus.All,
-            });
+            };
 
-            if (results.EntityFound)
-            {
-                var task = results.GetEntity();
-                var original = task.Title;
+            command
+                .WithCriteria(criteria)
+                .OnTaskFound((tasks, task) =>
+                {
+                    var original = task.Title;
 
-                task.Title = titleArg;
-                JsonHelper.SaveTasks(tasks);
+                    task.Title = titleArg;
+                    JsonHelper.SaveTasks(tasks);
 
-                Console.WriteLine(Constants.Messages.TaskUpdated, nameof(task.Title).ToLowerInvariant(), original, titleArg);
-            }
-            else if (results.CandidatesFound)
-            {
-                Console.WriteLine(Constants.Messages.MultipleTasksFound);
+                    Console.WriteLine(Constants.Messages.TaskUpdated, nameof(task.Title).ToLowerInvariant(), original, titleArg);
+                });
 
-                var view = ListViewFactory.GetViewFor(ViewOption.Verbose);
-                view.Render(results.Candidates);
-            }
-            else if (results.NoResults)
-            {
-                Console.WriteLine(Constants.Messages.NoTasksFound);
-            }
+            command.Execute();
         }
     }
 }
