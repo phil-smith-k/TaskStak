@@ -7,10 +7,11 @@ namespace TaskStak.CLI.Presentation.Formatters
         private const int MAX_FORMATTED_WIDTH = 80;
         private const int FALLBACK_WIDTH = 80;
 
-        protected static ITaskStakFormatter<DateTime> AgoFormatter => new DateTimeAgoFormatter();
+        protected ITaskStakFormatter<DateTime> AgoFormatter => new DateTimeAgoFormatter();
 
         public abstract string Format(TaskEntry item);
 
+        //BUG: This method is not properly truncating the title on the verbose view, cutting the title off way too early. 
         protected static string FormatWithAlignment(string symbol, string id, string title, string formattedDate)
         {
             var maxWidth = Math.Min(GetSafeTerminalWidth(), MAX_FORMATTED_WIDTH);
@@ -18,7 +19,6 @@ namespace TaskStak.CLI.Presentation.Formatters
             var maxTitleLength = maxWidth 
                               - symbol.Length 
                               - id.Length
-                              - title.Length 
                               - formattedDate.Length 
                               - 1  // 1 space before id 
                               - 1  // 1 space before title

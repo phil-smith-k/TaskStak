@@ -5,10 +5,12 @@ namespace TaskStak.CLI.Presentation.Formatters
 {
     public class VerboseTaskFormatter : TaskFormatterBase
     {
+        private ITaskStakFormatter<DateTime> DateTimeVerbose => new DateTimeVerboseFormatter();
+
         public override string Format(TaskEntry item)
         {
             var symbol = GetSymbol(item.Status.Value);
-            var formattedDate = AgoFormatter.Format(item.Timeline.CreatedOn);
+            var formattedDate = DateTimeVerbose.Format(item.Timeline.CreatedOn);
 
             return FormatWithAlignment(symbol, item.Id, item.Title, formattedDate);
         }
