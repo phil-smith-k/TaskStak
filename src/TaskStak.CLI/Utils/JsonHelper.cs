@@ -14,16 +14,11 @@ namespace TaskStak.CLI.Utils
 
         private static readonly string TasksFilePath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-            ".task",
-            "tasks.json"
+            Constants.FilePaths.Directory,
+            Constants.FilePaths.FileName
         );
 
         public static List<TaskEntry> LoadTasks()
-        {
-            return LoadTasks(t => true);
-        }
-
-        public static List<TaskEntry> LoadTasks(Func<TaskEntry, bool> predicate)
         {
             if (!File.Exists(TasksFilePath))
             {
@@ -36,7 +31,6 @@ namespace TaskStak.CLI.Utils
 
             return tasks
                 .Select(OutboundMapper.Map)
-                .Where(predicate)
                 .ToList();
         }
 
@@ -49,5 +43,7 @@ namespace TaskStak.CLI.Utils
 
             File.WriteAllText(TasksFilePath, json);
         }
+
+        public static string GetTasksFilePath() => TasksFilePath;
     }
 }

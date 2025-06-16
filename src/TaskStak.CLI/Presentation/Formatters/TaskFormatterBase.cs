@@ -73,6 +73,6 @@ namespace TaskStak.CLI.Presentation.Formatters
         }
 
         private static string FormatPadding(int padding)
-            => new string(' ', Math.Max(1, padding));
+            => new(' ', Math.Max(1, padding));
     }
 }

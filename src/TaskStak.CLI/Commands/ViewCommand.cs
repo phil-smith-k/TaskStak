@@ -60,7 +60,7 @@ namespace TaskStak.CLI.Commands
                 "m" => ViewOption.Month,
                 "v" => ViewOption.Verbose,
 
-                _ => throw new ArgumentException($"Invalid view argument '{arg}'. Run task --help to see view argument options."),
+                _ => throw new TaskStakException($"Invalid option '{arg}'. Valid options: day (d), verbose (v)"),
             };
 
             return result;

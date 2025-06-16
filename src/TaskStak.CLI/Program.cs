@@ -1,6 +1,9 @@
 ﻿using System.CommandLine;
+using System.CommandLine.Builder;
+using System.CommandLine.Parsing;
 using TaskStak.CLI;
 using TaskStak.CLI.Commands;
+using TaskStak.CLI.Utils;
 
 Startup.SetupInterface();
 
@@ -18,4 +21,14 @@ var rootCommand = new RootCommand("TaskStak - A developer-focused, performant ta
     ViewCommand.Create(),
 };
 
-return await rootCommand.InvokeAsync(args);
+var commandBuilder = new CommandLineBuilder(rootCommand)
+    .UseDefaults()
+    .UseExceptionHandler((exception, context) =>
+    {
+        var exitCode = ExceptionHandler.HandleGlobalException(exception);
+        context.ExitCode = exitCode;
+    });
+
+return await commandBuilder
+    .Build()
+    .InvokeAsync(args);

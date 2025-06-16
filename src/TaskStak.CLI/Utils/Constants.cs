@@ -43,6 +43,12 @@
             public const string Complete = "x";
         }
 
+        public static class FilePaths
+        {
+            public const string Directory = ".taskStak";
+            public const string FileName = "tasks.json";
+        }
+
         public static class Messages
         {
             public const string TaskAdded = $"{DisplaySymbol.Success} '{{0}}' added successfully.";

@@ -23,7 +23,7 @@
         public void Block()
         {
             if (this.IsBlocked)
-                throw new InvalidOperationException("Cannot block an already blocked task.");
+                throw new TaskStakException("Cannot block an already blocked task.");
 
             this.Timeline.LastModifiedOn = DateTime.UtcNow; 
             this.Status.SetTo(TaskEntryStatus.Blocked);
@@ -32,7 +32,7 @@
         public void Complete()
         {
             if (this.IsCompleted)
-                throw new InvalidOperationException("Cannot complete an already completed task.");
+                throw new TaskStakException("Cannot complete an already completed task.");
 
             this.Timeline.CompletedOn = DateTime.UtcNow;
             this.Status.SetTo(TaskEntryStatus.Completed);
@@ -72,7 +72,7 @@
         public void Unblock()
         {
             if (!this.IsBlocked)
-                throw new InvalidOperationException("Cannot unblock an unblocked task.");
+                throw new TaskStakException("Cannot unblock an unblocked task.");
 
             this.Timeline.LastModifiedOn = DateTime.UtcNow;
             this.Status.SetTo(TaskEntryStatus.Active);

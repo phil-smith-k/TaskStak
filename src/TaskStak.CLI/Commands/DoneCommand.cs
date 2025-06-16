@@ -23,7 +23,10 @@ namespace TaskStak.CLI.Commands
 
         public static void Execute(string queryArg)
         {
-            var criteria = new TaskSearchCriteria { Query = queryArg };
+            var criteria = new TaskSearchCriteria
+            {
+                Query = queryArg, StatusFlags = TaskEntryStatus.Active | TaskEntryStatus.Blocked 
+            };
             var searchCommand = new TaskSearchCommand();
 
             searchCommand

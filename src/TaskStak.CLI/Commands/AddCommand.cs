@@ -60,7 +60,7 @@ namespace TaskStak.CLI.Commands
                 "b" => TaskEntryStatus.Blocked, 
                 "c" => TaskEntryStatus.Completed,
 
-                _ => throw new ArgumentException($"Invalid status option '{arg}'. Run task --help to see status options."),
+                _ => throw new TaskStakException($"Invalid status '{arg}'. Valid options: active (a), blocked (b), completed (c)"),
             };
 
             return result;
