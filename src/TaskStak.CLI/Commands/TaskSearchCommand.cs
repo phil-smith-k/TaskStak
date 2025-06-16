@@ -15,8 +15,7 @@ namespace TaskStak.CLI.Commands
 
         private TaskSearchCriteria? _criteria;
 
-        private TaskFoundHandler _onTaskFound = (tasks, task) 
-            => throw new NotImplementedException("On task found implementation is required.");
+        private TaskFoundHandler? _onTaskFound;
 
         private NoResultsHandler _onNoResults = () 
             => Console.WriteLine(Constants.Messages.NoTasksFound);
@@ -56,7 +55,10 @@ namespace TaskStak.CLI.Commands
         public void Execute()
         {
             if (_criteria == null)
-                throw new ArgumentNullException(nameof(_criteria), "Search criteria is required.");
+                throw new InvalidOperationException("Cannot execute search command without search criteria. Call WithCriteria() before Execute().");
+
+            if (_onTaskFound == null)
+                throw new InvalidOperationException("Cannot execute search command without task found handler. Call OnTaskFound() before Execute().");
 
             var tasks = JsonHelper.LoadTasks();
             var results = _searchService.Search(tasks, _criteria);
