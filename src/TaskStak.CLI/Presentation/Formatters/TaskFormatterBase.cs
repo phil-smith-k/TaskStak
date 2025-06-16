@@ -5,13 +5,11 @@ namespace TaskStak.CLI.Presentation.Formatters
     public abstract class TaskFormatterBase : ITaskStakFormatter<TaskEntry>
     {
         private const int MAX_FORMATTED_WIDTH = 80;
-        private const int FALLBACK_WIDTH = 80;
 
         protected ITaskStakFormatter<DateTime> AgoFormatter => new DateTimeAgoFormatter();
 
         public abstract string Format(TaskEntry item);
 
-        //BUG: This method is not properly truncating the title on the verbose view, cutting the title off way too early. 
         protected static string FormatWithAlignment(string symbol, string id, string title, string formattedDate)
         {
             var maxWidth = Math.Min(GetSafeTerminalWidth(), MAX_FORMATTED_WIDTH);
@@ -30,7 +28,7 @@ namespace TaskStak.CLI.Presentation.Formatters
             }
 
             var padding = maxWidth - symbol.Length - id.Length - title.Length - formattedDate.Length - 2; // 2 for spaces before id and title
-            return $"{symbol} {id} {title}{new string(' ', Math.Max(1, padding))}{formattedDate}";
+            return $"{symbol} {id} {title}{FormatPadding(padding)}{formattedDate}";
         }
 
         protected static string FormatWithAlignment(string symbol, string title, string formattedDate)
@@ -49,7 +47,7 @@ namespace TaskStak.CLI.Presentation.Formatters
             }
 
             var padding = maxWidth - symbol.Length - title.Length - formattedDate.Length - 1; // 1 for space before title
-            return $"{symbol} {title}{new string(' ', Math.Max(1, padding))}{formattedDate}";
+            return $"{symbol} {title}{FormatPadding(padding)}{formattedDate}";
         }
 
         private static int GetSafeTerminalWidth()
@@ -60,7 +58,7 @@ namespace TaskStak.CLI.Presentation.Formatters
             }
             catch
             {
-                return FALLBACK_WIDTH; 
+                return MAX_FORMATTED_WIDTH; 
             }
         }
 
@@ -73,5 +71,8 @@ namespace TaskStak.CLI.Presentation.Formatters
                 ? title[..maxLength] + ellipsis
                 : ellipsis; 
         }
+
+        private static string FormatPadding(int padding)
+            => new string(' ', Math.Max(1, padding));
     }
 }
