@@ -10,6 +10,13 @@ namespace TaskStak.CLI.Presentation.Views
 
         public void Render(IEnumerable<TaskEntry> tasks)
         {
+            tasks = tasks.ToList();
+            if (!tasks.Any())
+            {
+                NoContent();
+                return;
+            }
+
             var (active, blocked, complete) = GroupByStatus(tasks);
 
             ISectionView[] sections =
@@ -20,6 +27,11 @@ namespace TaskStak.CLI.Presentation.Views
             ];
 
             Array.ForEach(sections, section => section.Render());
+        }
+
+        public void NoContent()
+        {
+            Console.WriteLine(@"Nothing to see here. ¯\_(ツ)_/¯");
         }
 
         private static (List<TaskEntry> Active, List<TaskEntry> Blocked, List<TaskEntry> Completed) GroupByStatus(IEnumerable<TaskEntry> tasks)

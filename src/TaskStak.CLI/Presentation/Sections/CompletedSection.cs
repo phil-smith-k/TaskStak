@@ -12,15 +12,14 @@ namespace TaskStak.CLI.Presentation.Sections
 
         public void Render()
         {
-            this.RenderHeader();
-
             if (!this.AnyTasks)
             {
                 this.NoContent();
                 return;
             }
 
-            foreach (var task in tasks)
+            Console.WriteLine(this.GetHeader());
+            foreach (var task in tasks.OrderByDescending(tsk => tsk.Timeline.CompletedOn))
             {
                 Console.WriteLine(formatter.Format(task));
             }
@@ -28,20 +27,12 @@ namespace TaskStak.CLI.Presentation.Sections
             Console.WriteLine();
         }
 
-        public void RenderHeader()
-        {
-            if (!this.AnyTasks)
-            {
-                Console.WriteLine($"{this.Title}");
-                return;
-            }
-
-            Console.WriteLine($"{this.Title} ({tasks.Count()})");
-        }
+        public string GetHeader()
+            => $"{this.Title} ({tasks.Count()})";
 
         public void NoContent()
         {
-            Console.WriteLine($"    {Constants.DisplaySymbol.Complete} Nothing completed yet - time to get started!");
+            Console.WriteLine(this.GetHeader());
             Console.WriteLine();
         }
     }

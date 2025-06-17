@@ -15,8 +15,7 @@ namespace TaskStak.CLI.Presentation.Sections
                 return;
             }
 
-            this.RenderHeader();
-            
+            Console.WriteLine(this.GetHeader());
             foreach (var task in tasks)
             {
                 Console.WriteLine(formatter.Format(task));
@@ -25,10 +24,8 @@ namespace TaskStak.CLI.Presentation.Sections
             Console.WriteLine();
         }
 
-        public void RenderHeader()
-        {
-            Console.WriteLine($"{this.Title} ({tasks.Count()})");
-        }
+        public string GetHeader()
+            => $"{this.Title} ({tasks.Count()})";
 
         public void NoContent()
         {

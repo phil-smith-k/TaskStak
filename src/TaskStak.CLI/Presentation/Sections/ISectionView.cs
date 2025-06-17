@@ -6,7 +6,7 @@
 
         void Render();
 
-        void RenderHeader();
+        string GetHeader();
 
         void NoContent();
     }

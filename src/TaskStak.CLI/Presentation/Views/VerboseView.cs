@@ -9,12 +9,24 @@ namespace TaskStak.CLI.Presentation.Views
 
         public void Render(IEnumerable<TaskEntry> tasks)
         {
+            tasks = tasks.ToList();
+            if (!tasks.Any())
+            {
+                this.NoContent();
+                return;
+            }
+
             var formatter = new VerboseTaskFormatter();
 
             foreach (var task in tasks.OrderByDescending(t => t.Timeline.CreatedOn))
             {
                 Console.WriteLine(formatter.Format(task));
             }
+        }
+
+        public void NoContent()
+        {
+            Console.WriteLine(@"Nothing to see here. ¯\_(ツ)_/¯");
         }
     }
 }

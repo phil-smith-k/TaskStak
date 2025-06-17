@@ -5,5 +5,7 @@ namespace TaskStak.CLI.Presentation.Views
     public interface IListView
     {
         void Render(IEnumerable<TaskEntry> tasks);
+
+        void NoContent();
     }
 }

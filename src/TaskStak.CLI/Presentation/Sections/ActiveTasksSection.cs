@@ -1,6 +1,5 @@
 ﻿using TaskStak.CLI.Models;
 using TaskStak.CLI.Presentation.Formatters;
-using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Presentation.Sections
 {
@@ -10,15 +9,14 @@ namespace TaskStak.CLI.Presentation.Sections
 
         public void Render()
         {
-            this.RenderHeader();
-
             if (!tasks.Any())
             {
                 this.NoContent();
                 return;
             }
 
-            foreach (var task in tasks)
+            Console.WriteLine(this.GetHeader());
+            foreach (var task in tasks.OrderByDescending(tsk => tsk.Timeline.LastModifiedOn ?? tsk.Timeline.CreatedOn))
             {
                 Console.WriteLine(formatter.Format(task));
             }
@@ -26,14 +24,12 @@ namespace TaskStak.CLI.Presentation.Sections
             Console.WriteLine();
         }
 
-        public void RenderHeader()
-        {
-            Console.WriteLine($"{this.Title} ({tasks.Count()})");
-        }
+        public string GetHeader()
+            => $"{this.Title} ({tasks.Count()})";
 
         public void NoContent()
         {
-            Console.WriteLine($"    {Constants.DisplaySymbol.Active} All caught up! Nice work!");
+            Console.WriteLine($"{this.GetHeader()} - All caught up! Nice work!");
             Console.WriteLine();
         }
     }

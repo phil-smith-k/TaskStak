@@ -38,9 +38,9 @@
             public const string Error = "\U0000274C";       // ❌
             public const string Warning = "\U000026A0";     // ⚠️
             public const string Info = "\U00002139";        // ℹ️
-            public const string Active = "*";       
-            public const string Blocked = "!";
-            public const string Complete = "x";
+            public const string Active = "[ ]";       
+            public const string Blocked = "[!]";
+            public const string Complete = "[x]";
         }
 
         public static class FilePaths
