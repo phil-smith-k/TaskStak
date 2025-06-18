@@ -367,4 +367,5 @@ FodyWeavers.xsd
 *.bak
 
 # Release script
-release.ps1
+publish.ps1
+publish.bat
