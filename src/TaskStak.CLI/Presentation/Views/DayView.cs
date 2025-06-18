@@ -1,6 +1,7 @@
 ﻿using TaskStak.CLI.Models;
 using TaskStak.CLI.Presentation.Formatters;
 using TaskStak.CLI.Presentation.Sections;
+using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Presentation.Views
 {
@@ -50,7 +51,7 @@ namespace TaskStak.CLI.Presentation.Views
                 {
                     blocked.Add(task);
                 }
-                else if (task.IsCompleted)
+                else if (task.IsCompleted && task.Timeline.CompletedOn.IsToday())
                 {
                     completed.Add(task);
                 }
