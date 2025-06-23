@@ -16,7 +16,7 @@ namespace TaskStak.CLI.Presentation.Sections
             }
 
             Console.WriteLine(this.GetHeader());
-            foreach (var task in tasks.OrderByDescending(tsk => tsk.Timeline.LastModifiedOn ?? tsk.Timeline.CreatedOn))
+            foreach (var task in tasks.OrderByDescending(tsk => tsk.Timeline.CreatedOn))
             {
                 Console.WriteLine(formatter.Format(task));
             }
