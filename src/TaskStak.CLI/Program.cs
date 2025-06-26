@@ -24,10 +24,13 @@ var rootCommand = new RootCommand("TaskStak - A developer-focused, performant ta
 
 var commandBuilder = new CommandLineBuilder(rootCommand)
     .UseDefaults()
-    .UseExceptionHandler((exception, context) =>
+    .UseExceptionHandler(async (exception, context) =>
     {
-        var exitCode = ExceptionHandler.HandleGlobalException(exception);
-        context.ExitCode = exitCode;
+        await Task.Run(() =>
+        {
+            var exitCode = ExceptionHandler.HandleGlobalException(exception);
+            context.ExitCode = exitCode;
+        });
     });
 
 return await commandBuilder
