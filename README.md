@@ -133,6 +133,10 @@ The date argument provides a fast way to stage tasks using natural language. Whi
 **Date Formats:**
 - `yyyy-MM-dd` - ISO format (e.g., `2025-01-15`)
 - `yyyy/MM/dd` - Alternative ISO format (e.g., `2025/01/15`)
+- `yyyyMMdd` - Compact format (e.g., `20250115`)
+- `yyyy.MM.dd` - Dot notation (e.g., `2025.01.15`)
+- `dd-MMM-yyyy` - Month name format (e.g., `15-Jan-2025`)
+- Local date formats - Falls back to your system's date parsing for additional flexibility
 
 #### In Option `--in <number>`
 - `--in <number>` - Stage 'n' days from today; must be a non-negative value
