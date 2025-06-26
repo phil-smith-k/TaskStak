@@ -24,6 +24,7 @@ namespace TaskStak.CLI.Utils
                 CreatedOn = source.CreatedOn.ToLocalTime(),
                 CompletedOn = source.CompletedOn?.ToLocalTime(),
                 LastModifiedOn = source.LastModifiedOn?.ToLocalTime(),
+                StagedFor = source.StagedFor,
             };
         }
     }

@@ -8,6 +8,6 @@
 
         public DateTime? LastModifiedOn { get; set; }
 
-        public DateTime? StatusChangedOn { get; set; }
+        public DateOnly? StagedFor { get; set; }
     }
 }

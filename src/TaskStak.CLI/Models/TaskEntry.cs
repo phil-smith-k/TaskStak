@@ -62,11 +62,20 @@
         }
 
         public void SetStatusTo(TaskEntryStatus status)
-        {
-            if (this.Status.Is(status))
-                return;
+            => this.Status.SetTo(status);
 
-            this.Status.SetTo(status);
+        public void StageToStak(DateTime date)
+        {
+            this.StageToStak(DateOnly.FromDateTime(date));
+        }
+
+        public void StageToStak(DateOnly date)
+        {
+            if (date == DateOnly.MinValue)
+                throw new ArgumentException("Invalid date provided to stage task to stak", nameof(date));
+
+            this.Timeline.StagedFor = date;
+            this.Timeline.LastModifiedOn = DateTime.UtcNow;
         }   
 
         public void Unblock()

@@ -11,6 +11,8 @@
         public DateTime CreatedOn { get; set; }
 
         public DateTime? LastModifiedOn { get; set; }
+
+        public DateOnly? StagedFor { get; set; }
         #endregion
 
         #region Static Methods
