@@ -43,7 +43,7 @@ namespace TaskStak.CLI.Presentation.Views
 
             foreach (var task in tasks)
             {
-                if (task.IsActive)
+                if (task.IsActive && task.IsStagedFor(DateTime.Today))
                 {
                     active.Add(task);
                 }

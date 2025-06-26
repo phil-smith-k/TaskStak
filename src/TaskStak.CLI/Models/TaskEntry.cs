@@ -61,6 +61,12 @@
             this.Status.SetTo(status);
         }
 
+        public bool IsStagedFor(DateTime date)
+            => this.IsStagedFor(DateOnly.FromDateTime(date));
+
+        public bool IsStagedFor(DateOnly date)
+            => this.Timeline.StagedFor.HasValue && this.Timeline.StagedFor == date;
+
         public void SetStatusTo(TaskEntryStatus status)
             => this.Status.SetTo(status);
 
@@ -76,7 +82,7 @@
 
             this.Timeline.StagedFor = date;
             this.Timeline.LastModifiedOn = DateTime.UtcNow;
-        }   
+        }
 
         public void Unblock()
         {
