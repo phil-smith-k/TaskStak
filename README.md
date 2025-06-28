@@ -61,16 +61,20 @@ View tasks staged for specific days using the same natural language patterns as 
 task view                           # Today's stak (default)
 task view --tomorrow                # Tomorrow's staged tasks
 task view --friday                  # Friday's staged tasks
-task view 2025-01-15               # Tasks staged for specific date
-task view --today --verbose        # Today's tasks with details
+task view 2025-01-15                # Tasks staged for specific date
+task view --today --verbose         # Today's tasks with details
 task view --tomorrow -v             # Tomorrow's tasks with details
 ```
 
 #### Stak for Today (Default)
 When running `task view` with no arguments, displays:
-- Active tasks staged for today
-- Blocked tasks, if any, regardless of date
-- Tasks completed today
+- **Past staged tasks** (in red) - Tasks that were staged for previous days and need attention
+- **Active tasks** staged for today
+- **Blocked tasks** from any date (keeps dependencies visible and prevents them from being forgotten)  
+- **Tasks completed** today
+
+**Past Staged Tasks:**
+Tasks that were scheduled for previous days appear prominently at the top with a warning to ensure nothing gets lost or forgotten. These are shown in red with the number of days since they were originally staged (e.g., "from 3d ago").
 
 #### Staks for Other Dates
 When viewing other dates (ex. `task view --tomorrow`), displays:
@@ -100,10 +104,10 @@ task move <query> [--status | -s <active|blocked|completed>]
 
 **Examples:**
 ```bash
-task move "auth" -s blocked         # Move auth task to blocked
-task move "memory leak" --status active
-task move "documentation" -s completed
-task move "API integration" -s a    # Using status shortcuts
+task move "auth" -s blocked                 # Move auth task to blocked
+task move "memory leak" --status active     # Move memory leak task to active
+task move "documentation" -s completed      # Mark documentation task as completed
+task move "API integration" -s a            # Using status shortcuts
 ```
 
 ### `title` - Update Task Titles
