@@ -24,8 +24,12 @@ namespace TaskStak.CLI.Commands
         {
             Console.WriteLine(Constants.Messages.MultipleTasksFound);
 
-            var view = ListViewFactory.GetViewFor(ViewOption.Verbose);
-            view.Render(tasks);
+            var view = TaskViewFactory.GetViewFor(new ListOptions
+            {
+                Verbose = true,
+            });
+
+            view.RenderTasks(tasks);
         };
 
         public TaskSearchCommand WithCriteria(TaskSearchCriteria criteria)

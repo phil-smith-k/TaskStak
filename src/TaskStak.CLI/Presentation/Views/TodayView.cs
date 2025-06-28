@@ -5,11 +5,22 @@ using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Presentation.Views
 {
-    public class DayView(ListOptions options) : IListView
+    public class TodayView : ITaskView
     {
-        private readonly ListOptions _options = options;
+        private readonly ListOptions _options;
+        private readonly ITaskStakFormatter<string> _headerFormatter = new HeaderFormatter();
 
-        public void Render(IEnumerable<TaskEntry> tasks)
+        public string Title => $"Stak for Today - {_options.Date!.Value:MMMM dd, yyyy}";
+
+        public TodayView(ListOptions options)
+        {
+            if (!options.Date.IsToday())
+                throw new ArgumentException($"Date option must be set to today for {nameof(TodayView)}.", nameof(options.Date));
+
+            _options = options;
+        }
+
+        public void RenderTasks(IEnumerable<TaskEntry> tasks)
         {
             tasks = tasks.ToList();
             if (!tasks.Any())
@@ -18,15 +29,17 @@ namespace TaskStak.CLI.Presentation.Views
                 return;
             }
 
-            var (active, blocked, complete) = GroupByStatus(tasks);
+            var (active, blocked, completed) = GroupByStatus(tasks);
 
+            var verbose = _options.Verbose;
             ISectionView[] sections =
             [
-                new ActiveTasksSection(active, new ActiveTaskFormatter()),
-                new BlockedSection(blocked, new BlockedTaskFormatter()),
-                new CompletedSection(complete, new CompletedTaskFormatter())
+                new ActiveTasksSection(active, verbose ? new VerboseTaskFormatter() : new ActiveTaskFormatter()),
+                new BlockedSection(blocked, verbose ? new VerboseTaskFormatter() : new BlockedTaskFormatter()),
+                new CompletedSection(completed, verbose ? new VerboseTaskFormatter() : new CompletedTaskFormatter())
             ];
 
+            Console.WriteLine(_headerFormatter.Format(this.Title));
             Array.ForEach(sections, section => section.Render());
         }
 

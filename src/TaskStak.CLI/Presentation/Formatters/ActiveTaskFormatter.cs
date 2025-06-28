@@ -7,11 +7,11 @@ namespace TaskStak.CLI.Presentation.Formatters
     {
         public override string Format(TaskEntry taskEntry)
         {
-            var emoji = Constants.DisplaySymbol.Active;
+            var symbol = Constants.DisplaySymbol.Active;
             var title = taskEntry.Title;
             var formattedDate = AgoFormatter.Format(taskEntry.Timeline.CreatedOn);
 
-            return FormatWithAlignment(emoji, title, formattedDate);
+            return FormatWithAlignment(symbol, title, formattedDate);
         }
     }
 }

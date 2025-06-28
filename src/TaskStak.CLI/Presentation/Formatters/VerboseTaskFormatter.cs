@@ -23,7 +23,7 @@ namespace TaskStak.CLI.Presentation.Formatters
                 TaskEntryStatus.Blocked => Constants.DisplaySymbol.Blocked,
                 TaskEntryStatus.Completed => Constants.DisplaySymbol.Complete,
 
-                _ => throw new ArgumentOutOfRangeException($"Invalid enum value {(int)status} for {typeof(TaskEntryStatus)}")
+                _ => throw new ArgumentOutOfRangeException($"Invalid enum value {(int)status} for {typeof(TaskEntryStatus)}"),
             };
         }
     }

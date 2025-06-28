@@ -70,8 +70,8 @@
             public const string Status = "--status";
             public const string StatusAlias = "-s";
 
-            public const string View = "--view";
-            public const string ViewAlias = "-v";
+            public const string Verbose = "--verbose";
+            public const string VerboseAlias = "-v";
 
             // Day flags - used for date argument
             public const string Today = "--today";
@@ -105,7 +105,7 @@
             {
                 public const string InDayDesc = "Add to stak N days from the current date.";
                 public const string StatusDesc = "The status of the task to add. Defaults to 'Active'.";
-                public const string ViewDesc = "The view to use when listing tasks. Defaults to 'Day'. Case insensitive. First letter abberviation accepted (ex. 'task view -v w' for 'Week')";
+                public const string VerboseDesc = "When option is present, displays more task details.";
             }
         }
     }

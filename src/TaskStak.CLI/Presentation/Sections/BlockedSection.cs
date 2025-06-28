@@ -5,7 +5,7 @@ namespace TaskStak.CLI.Presentation.Sections
 {
     public class BlockedSection(IEnumerable<TaskEntry> tasks, ITaskStakFormatter<TaskEntry> formatter) : ISectionView
     {
-        public string Title => "Blocked Tasks";
+        public string Title => "Blocked";
 
         public void Render()
         {

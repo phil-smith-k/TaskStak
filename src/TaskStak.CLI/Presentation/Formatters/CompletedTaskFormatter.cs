@@ -7,13 +7,13 @@ namespace TaskStak.CLI.Presentation.Formatters
     {
         public override string Format(TaskEntry taskEntry)
         {
-            var emoji = Constants.DisplaySymbol.Complete;
+            var symbol = Constants.DisplaySymbol.Complete;
             var title = taskEntry.Title;
 
             var completedDate = taskEntry.Timeline.CompletedOn ?? throw new NullReferenceException("Completed date cannot be null.");
             var formattedDate = AgoFormatter.Format(completedDate);
 
-            return FormatWithAlignment(emoji, title, formattedDate);
+            return FormatWithAlignment(symbol, title, formattedDate);
         }
     }
 }

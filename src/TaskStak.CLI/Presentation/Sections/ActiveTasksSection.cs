@@ -5,7 +5,7 @@ namespace TaskStak.CLI.Presentation.Sections
 {
     public class ActiveTasksSection(IEnumerable<TaskEntry> tasks, ITaskStakFormatter<TaskEntry> formatter) : ISectionView
     {
-        public string Title => "Active Tasks";
+        public string Title => "Active";
 
         public void Render()
         {

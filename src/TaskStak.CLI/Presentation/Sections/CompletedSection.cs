@@ -6,7 +6,7 @@ namespace TaskStak.CLI.Presentation.Sections
 {
     public class CompletedSection(IEnumerable<TaskEntry> tasks, ITaskStakFormatter<TaskEntry> formatter) : ISectionView
     {
-        public string Title => "Completed Tasks";
+        public string Title => "Completed";
 
         private bool AnyTasks => tasks.Any();
 

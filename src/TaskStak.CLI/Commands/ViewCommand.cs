@@ -13,57 +13,47 @@ namespace TaskStak.CLI.Commands
 
         public static Command Create()
         {
-            var viewOption = new Option<ViewOption>(
-                aliases: [Constants.Options.View, Constants.Options.ViewAlias], 
-                parseArgument: ParseViewOption,
+            var dateArg = new Argument<DateOnly>(
+                name: Constants.Arguments.Date,
+                parse: ParseArgument.ParseDateArgument,
                 isDefault: true,
-                description: Constants.Options.Descriptions.ViewDesc);
+                description: Constants.Arguments.Descriptions.DateDesc);
+
+            var verboseOption = new Option<bool>(
+                aliases: [Constants.Options.Verbose, Constants.Options.VerboseAlias], 
+                description: Constants.Options.Descriptions.VerboseDesc);
+
+            dateArg.AddValidator(ValidateDateArg);
 
             var command = new Command(Name, Description)
             {
-                viewOption,
+                dateArg,
+                verboseOption,
             };
 
-            command.SetHandler(Execute, viewOption);
-
+            command.SetHandler(Execute, dateArg, verboseOption);
             return command;
         }
 
-        public static void Execute(ViewOption viewArg)
+        public static void Execute(DateOnly dateArg, bool verboseOption)
         {
             var tasks = JsonHelper.LoadTasks();
             var options = new ListOptions
             {
-                ViewOption = viewArg,
+                Date = dateArg,
+                Verbose = verboseOption, 
             };
 
-            var view = ListViewFactory.GetViewFor(options);
-            view.Render(tasks);
+            var view = TaskViewFactory.GetViewFor(options);
+            view.RenderTasks(tasks);
         }
 
-        private static ViewOption ParseViewOption(ArgumentResult argResult)
+        private static void ValidateDateArg(ArgumentResult result)
         {
-            ViewOption result = default;
-            var arg = argResult.Tokens.SingleOrDefault()?.Value;
-
-            if (string.IsNullOrWhiteSpace(arg))
-                return result;
-
-            var parsed = Enum.TryParse(arg, ignoreCase: true, out result);
-            if (parsed)
-                return result;
-
-            result = arg.ToLowerInvariant() switch
+            if (result.GetValueForArgument(result.Argument) is not DateOnly date || date == DateOnly.MinValue)
             {
-                "d" => ViewOption.Day,
-                "w" => ViewOption.Week,
-                "m" => ViewOption.Month,
-                "v" => ViewOption.Verbose,
-
-                _ => throw new TaskStakException($"Invalid option '{arg}'. Valid options: day (d), verbose (v)"),
-            };
-
-            return result;
+                result.ErrorMessage = "Invalid date format. Use any standard date format or use --today, --tomorrow, --monday, --tuesday, etc.";
+            }
         }
     }
 }
