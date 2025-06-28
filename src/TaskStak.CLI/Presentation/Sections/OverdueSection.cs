@@ -8,7 +8,7 @@ namespace TaskStak.CLI.Presentation.Sections
     {
         private readonly ConsoleColor _overdueColor = ConsoleColor.DarkYellow;
 
-        public string Title => $"Overdue";
+        public string Title => Constants.DisplaySymbol.Warning;
 
         public void Render()
         {
@@ -31,6 +31,9 @@ namespace TaskStak.CLI.Presentation.Sections
         { }
 
         public string GetHeader()
-            => $"{Constants.DisplaySymbol.Warning} {this.Title} - {tasks.Count()} tasks need your attention.";
+        {
+            var count = tasks.Count();
+            return $"{this.Title} {count} {(count == 1 ? "task needs" : "tasks need")} your attention...";
+        } 
     }
 }

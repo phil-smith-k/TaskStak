@@ -14,7 +14,7 @@ namespace TaskStak.CLI.Presentation.Formatters
             var title = taskEntry.Title;
 
             var stagedFor = taskEntry.Timeline.StagedFor.Value;
-            var formattedDate = AgoFormatter.Format(stagedFor.ToDateTime());
+            var formattedDate = $"from {AgoFormatter.Format(stagedFor.ToDateTime())}";
 
             return FormatWithAlignment(symbol, title, formattedDate);
         }
