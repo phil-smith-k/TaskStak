@@ -66,15 +66,16 @@ task view --today --verbose        # Today's tasks with details
 task view --tomorrow -v             # Tomorrow's tasks with details
 ```
 
-#### Today View (Default)
+#### Stak for Today (Default)
 When running `task view` with no arguments, displays:
 - Active tasks staged for today
-- Blocked tasks staged for today  
+- Blocked tasks, if any, regardless of date
 - Tasks completed today
 
-#### Other Day Views
-When viewing other days, displays:
-- Tasks staged for that specific day (active and blocked)
+#### Staks for Other Dates
+When viewing other dates (ex. `task view --tomorrow`), displays:
+- Tasks staged for that specific day (active)
+- If past date, any tasks completed that day
 
 ### `done` - Complete Tasks
 Mark a task as completed using fuzzy search.
@@ -133,7 +134,7 @@ task rm "duplicate task"            # Delete unwanted task
 task rm "test"                      # Remove test task
 ```
 
-**⚠️ Warning:** This action permanently deletes the task and cannot be undone. Use with caution.
+**⚠️ Warning:** This action permanently deletes the task and cannot be undone. 
 
 ### `stak` - Stage Tasks for Specific Days
 Stage tasks for future work on specific days using natural language or date formats.
@@ -143,7 +144,7 @@ task stak <query> [<date-argument>] [--in <number>]
 ```
 
 #### Date Argument `<date-argument>`
-The date argument provides a fast way to stage tasks using natural language. While it may seem unintuitive at first, it's designed to speed up the staging process. You can use natural language options, aliases for common days, or standard date formats.
+The date argument provides an intuitive way to stage tasks using natural language, designed to speed up the staging process. You can use the natural language options, aliases for common days, or standard date formats.
 
 **Natural Language Options:**
 - `--today`, `-t` - Stage for today (default if no argument provided)
