@@ -21,6 +21,7 @@
             public const string Add = "add";
             public const string Done = "done";
             public const string Move = "move";
+            public const string Remove = "rm";
             public const string Stak = "stak";
             public const string Title = "title";
             public const string View = "view";
@@ -30,6 +31,7 @@
                 public const string AddDesc = "Add a task to your stak.";
                 public const string DoneDesc = "Mark a task complete.";
                 public const string MoveDesc = "Move a task to a different status.";
+                public const string RemoveDesc = "Removes a task completely. Cannot be undone.";
                 public const string StakDesc = "Stage a task to a task stak for a particular date.";
                 public const string TitleDesc = "Update the title of an existing task.";
                 public const string ViewDesc = "View current tasks in stak.";
@@ -59,6 +61,7 @@
             public const string TaskCompleted = $"{DisplaySymbol.Success} '{{0}}' completed successfully.";
             public const string TaskUpdated = $"{DisplaySymbol.Success} Task '{{0}}' updated from '{{1}}' to '{{2}}'";
             public const string TaskAddedToStak = $"{DisplaySymbol.Success} Task '{{0}}' staged for {{1}} {{2}}";
+            public const string TaskRemoved = $"{DisplaySymbol.Success} Task '{{0}}' removed.";
             public const string MultipleTasksFound = $"{DisplaySymbol.Warning} Multiple tasks found. Please be more specific.";
             public const string NoTasksFound = $"{DisplaySymbol.Error} No tasks found.";
             public const string QueryNotFoundInStatus = $"{DisplaySymbol.Error} Query '{{0}}' found no results in {{1}} status.";
