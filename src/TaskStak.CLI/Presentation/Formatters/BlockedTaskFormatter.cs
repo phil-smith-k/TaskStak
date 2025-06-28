@@ -10,8 +10,7 @@ namespace TaskStak.CLI.Presentation.Formatters
             var symbol = Constants.DisplaySymbol.Blocked;
             var title = task.Title;
 
-            var statusChangedOn = task.Timeline.LastModifiedOn ?? task.Timeline.CreatedOn;
-            var formattedDate = AgoFormatter.Format(statusChangedOn);
+            var formattedDate = AgoFormatter.Format(task.Timeline.CreatedOn);
 
             return FormatWithAlignment(symbol, title, formattedDate);
         }

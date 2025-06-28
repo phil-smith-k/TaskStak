@@ -10,7 +10,7 @@ namespace TaskStak.CLI.Presentation.Views
         private readonly ListOptions _options;
         private readonly ITaskStakFormatter<string> _headerFormatter = new HeaderFormatter();
 
-        public string Title => $"Stak for Today - {_options.Date!.Value:MMMM dd, yyyy}";
+        public string Title => $"Today";
 
         public TodayView(ListOptions options)
         {
@@ -29,18 +29,24 @@ namespace TaskStak.CLI.Presentation.Views
                 return;
             }
 
+            var verbose = _options.Verbose;
             var (active, blocked, completed) = GroupByStatus(tasks);
 
-            var verbose = _options.Verbose;
-            ISectionView[] sections =
+            List<ISectionView> sections =
             [
                 new ActiveTasksSection(active, verbose ? new VerboseTaskFormatter() : new ActiveTaskFormatter()),
                 new BlockedSection(blocked, verbose ? new VerboseTaskFormatter() : new BlockedTaskFormatter()),
                 new CompletedSection(completed, verbose ? new VerboseTaskFormatter() : new CompletedTaskFormatter())
             ];
 
+            var overdue = tasks.Where(task => task.IsOverdue && !task.IsBlocked).ToList();
+            if (overdue.Any())
+            {
+                sections.Insert(0, new OverdueSection(overdue, verbose ? new VerboseTaskFormatter() : new OverdueTaskFormatter()));
+            }
+
             Console.WriteLine(_headerFormatter.Format(this.Title));
-            Array.ForEach(sections, section => section.Render());
+            sections.ForEach(section => section.Render());
         }
 
         public void NoContent()

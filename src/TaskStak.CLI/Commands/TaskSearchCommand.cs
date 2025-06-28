@@ -1,4 +1,6 @@
 ﻿using TaskStak.CLI.Models;
+using TaskStak.CLI.Presentation.Formatters;
+using TaskStak.CLI.Presentation.Sections;
 using TaskStak.CLI.Presentation.Views;
 using TaskStak.CLI.Services;
 using TaskStak.CLI.Utils;
@@ -22,13 +24,7 @@ namespace TaskStak.CLI.Commands
 
         private CandidatesFoundHandler _onCandidatesFound = (tasks) =>
         {
-            Console.WriteLine(Constants.Messages.MultipleTasksFound);
-
-            var view = TaskViewFactory.GetViewFor(new ListOptions
-            {
-                Verbose = true,
-            });
-
+            var view = new CandidatesView();
             view.RenderTasks(tasks);
         };
 

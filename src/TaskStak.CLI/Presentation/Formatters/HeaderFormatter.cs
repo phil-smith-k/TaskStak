@@ -4,8 +4,7 @@
     {
         public override string Format(string item)
         {
-            var maxWidth = GetMaxWidth();
-            return $"{FormatWithRightAlignment(item)}\n{FormatPadding('-', maxWidth)}\n";
+            return FormatWithRightAlignment(item, '-');
         }
     }
 }

@@ -62,7 +62,7 @@
             public const string TaskUpdated = $"{DisplaySymbol.Success} Task '{{0}}' updated from '{{1}}' to '{{2}}'";
             public const string TaskAddedToStak = $"{DisplaySymbol.Success} Task '{{0}}' staged for {{1}} {{2}}";
             public const string TaskRemoved = $"{DisplaySymbol.Success} Task '{{0}}' removed.";
-            public const string MultipleTasksFound = $"{DisplaySymbol.Warning} Multiple tasks found. Please be more specific.";
+            public const string CandidatesFound = $"{DisplaySymbol.Warning} Multiple tasks found. Refine your query or use 8-digit task identifier.";
             public const string NoTasksFound = $"{DisplaySymbol.Error} No tasks found.";
             public const string QueryNotFoundInStatus = $"{DisplaySymbol.Error} Query '{{0}}' found no results in {{1}} status.";
         }

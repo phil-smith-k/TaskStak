@@ -17,6 +17,12 @@
 
         public bool IsCompleted
             => this.Status.IsOn(TaskEntryStatus.Completed);
+
+        public bool IsOverdue
+             => !this.IsCompleted && this.IsStaged && this.Timeline.StagedFor < DateOnly.FromDateTime(DateTime.Today);
+
+        public bool IsStaged
+            => !this.IsCompleted && this.Timeline.StagedFor.HasValue;
         #endregion
 
         #region Public Methods

@@ -10,7 +10,7 @@ namespace TaskStak.CLI.Presentation.Views
         private readonly ListOptions _options;
         private readonly ITaskStakFormatter<string> _headerFormatter = new HeaderFormatter();
 
-        public string Title => $"Stak for {(_options.Date!.Value.AddDays(-1).IsToday() ? "Tomorrow" : string.Empty)} - {_options.Date!.Value:MMMM dd, yyyy}";
+        public string Title => $"{(_options.Date!.Value.AddDays(-1).IsToday() ? "Tomorrow" : _options.Date!.Value.ToString("ddd MMMM dd, yyyy"))}";
 
         public DateView(ListOptions options)
         {
