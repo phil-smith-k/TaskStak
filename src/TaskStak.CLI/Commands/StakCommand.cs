@@ -13,15 +13,19 @@ namespace TaskStak.CLI.Commands
 
         public static Command Create()
         {
-            var queryArg = new Argument<string>(Constants.Arguments.Query, Constants.Arguments.Descriptions.QueryDesc);
+            var queryArg = new Argument<string>(
+                name: Constants.Arguments.Query, 
+                description: Constants.Arguments.Descriptions.QueryDesc);
 
             var dateArg = new Argument<DateOnly>(
-                Constants.Arguments.Date,
+                name: Constants.Arguments.Date,
                 parse: ParseArgument.ParseDateArgument,
                 isDefault: true,
-                Constants.Arguments.Descriptions.DateDesc);
+                description: Constants.Arguments.Descriptions.DateDesc);
 
-            var inDayOption = new Option<int?>(Constants.Options.InDay, Constants.Options.Descriptions.InDayDesc);
+            var inDayOption = new Option<int?>(
+                name: Constants.Options.InDay, 
+                description: Constants.Options.Descriptions.InDayDesc);
 
             dateArg.AddValidator(ValidateDateArg);
             inDayOption.AddValidator(ValidateInDayOption);
@@ -73,12 +77,7 @@ namespace TaskStak.CLI.Commands
 
         private static void ValidateDateArg(ArgumentResult result)
         {
-            if (result.GetValueForArgument(result.Argument) is not DateOnly date)
-            {
-                return;
-            }
-
-            if (date == DateOnly.MinValue) // Sentinel value indicates argument was supplied, but parsing failed
+            if (result.GetValueForArgument(result.Argument) is not DateOnly date || date == DateOnly.MinValue) // Sentinel value indicates argument was supplied, but parsing failed
             {
                 result.ErrorMessage = "Invalid date format. Use any standard date format or use --today, --tomorrow, --monday, --tuesday, etc.";
             }
