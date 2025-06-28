@@ -44,25 +44,37 @@ task add "update documentation" --status completed
 ```
 
 ### `view` - Display Tasks
-View your daily tasks as well as detailed task information
+View tasks staged for specific days using natural language date arguments.
 
 ```bash
-task view [--view | -v <day|verbose>]
+task view [<date-argument>] [--verbose | -v]
 ```
+
+#### Date Arguments
+View tasks staged for specific days using the same natural language patterns as the `stak` command. See the [Date Argument section](#date-argument-date-argument) under the `stak` command for complete details on available options.
+
+#### Verbose Mode
+- `--verbose`, `-v` - Show detailed information including task IDs and timestamps
 
 **Examples:**
 ```bash
-task view                   # Daily view (default)
-task view -v day            # Same as default
-task view -v verbose        # Detailed view with IDs and timestamps
-task view -v v              # Verbose view shorthand
+task view                           # Today's stak (default)
+task view --tomorrow                # Tomorrow's staged tasks
+task view --friday                  # Friday's staged tasks
+task view 2025-01-15               # Tasks staged for specific date
+task view --today --verbose        # Today's tasks with details
+task view --tomorrow -v             # Tomorrow's tasks with details
 ```
 
-#### Daily View 
-Displays only tasks staged for today and tasks completed today, organized by status (active, blocked, completed).
+#### Today View (Default)
+When running `task view` with no arguments, displays:
+- Active tasks staged for today
+- Blocked tasks staged for today  
+- Tasks completed today
 
-#### Verbose View 
-Shows additional details including task IDs and exact timestamps.
+#### Other Day Views
+When viewing other days, displays:
+- Tasks staged for that specific day (active and blocked)
 
 ### `done` - Complete Tasks
 Mark a task as completed using fuzzy search.
@@ -106,6 +118,22 @@ task title "auth" "implement OAuth2 with refresh tokens"
 task title "memory leak" "fix memory leak in JSON parser module"
 task title "docs" "update API documentation with examples"
 ```
+
+### `rm` - Remove Tasks
+Permanently delete a task from your stak.
+
+```bash
+task rm <query>
+```
+
+**Examples:**
+```bash
+task rm "old feature"               # Remove task permanently
+task rm "duplicate task"            # Delete unwanted task
+task rm "test"                      # Remove test task
+```
+
+**⚠️ Warning:** This action permanently deletes the task and cannot be undone. Use with caution.
 
 ### `stak` - Stage Tasks for Specific Days
 Stage tasks for future work on specific days using natural language or date formats.
@@ -221,12 +249,16 @@ task stak "CSS issues" --wednesday
 task stak "code review" --friday
 
 # During the day
-task view                              # Check what's on deck
+task view                              # Check what's on deck for today
+task view --tomorrow                   # Plan tomorrow's work
 task done "registration"               # Mark progress
 task move "CSS issues" -s blocked      # Waiting on designer
 
-# End of day
-task view -v verbose                   # Review all activity
+# Weekly review
+task view --tomorrow --verbose         # Review tomorrow's tasks with details
+
+# Clean up
+task rm "old prototype"                # Remove obsolete tasks
 ```
 
 ## License
