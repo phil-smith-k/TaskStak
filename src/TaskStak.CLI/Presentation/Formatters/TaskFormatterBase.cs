@@ -4,7 +4,7 @@ namespace TaskStak.CLI.Presentation.Formatters
 {
     public abstract class TaskFormatterBase : FormatterBase<TaskEntry>
     {
-        protected ITaskStakFormatter<DateTime> AgoFormatter => new DateTimeAgoFormatter();
+        protected ITaskStakFormatter<DateTimeOffset> AgoFormatter => new DateTimeAgoFormatter();
 
         protected static string FormatWithAlignment(string symbol, string id, string title, string formattedDate)
         {

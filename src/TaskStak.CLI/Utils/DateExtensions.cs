@@ -8,6 +8,12 @@
         public static bool IsToday(this DateTime src)
             => src.Date == DateTime.Now.Date;
 
+        public static bool IsToday(this DateTimeOffset? src)
+            => src?.Date == DateTimeOffset.Now.Date;
+
+        public static bool IsToday(this DateTimeOffset src)
+            => src.Date == DateTimeOffset.Now.Date;
+
         public static bool IsToday(this DateOnly? src)
             => src == DateOnly.FromDateTime(DateTime.Today);
 

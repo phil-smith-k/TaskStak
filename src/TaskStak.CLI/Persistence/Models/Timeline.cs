@@ -2,11 +2,11 @@
 {
     public class Timeline
     {
-        public DateTime? CompletedOn { get; set; }
+        public DateTimeOffset? CompletedOn { get; set; }
 
-        public DateTime CreatedOn { get; set; }
+        public DateTimeOffset CreatedOn { get; set; }
 
-        public DateTime? LastModifiedOn { get; set; }
+        public DateTimeOffset? LastModifiedOn { get; set; }
 
         public DateOnly? StagedFor { get; set; }
     }

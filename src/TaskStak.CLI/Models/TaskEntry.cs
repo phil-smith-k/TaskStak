@@ -31,7 +31,7 @@
             if (this.IsBlocked)
                 throw new TaskStakException("Cannot block an already blocked task.");
 
-            this.Timeline.LastModifiedOn = DateTime.UtcNow; 
+            this.Timeline.LastModifiedOn = DateTimeOffset.Now; 
             this.Status.SetTo(TaskEntryStatus.Blocked);
         }
 
@@ -40,7 +40,7 @@
             if (this.IsCompleted)
                 throw new TaskStakException("Cannot complete an already completed task.");
 
-            this.Timeline.CompletedOn = DateTime.UtcNow;
+            this.Timeline.CompletedOn = DateTimeOffset.Now;
             this.Status.SetTo(TaskEntryStatus.Completed);
         }
 
@@ -63,7 +63,7 @@
                 this.Timeline.CompletedOn = null;
             }
 
-            this.Timeline.LastModifiedOn = DateTime.UtcNow;
+            this.Timeline.LastModifiedOn = DateTimeOffset.Now;
             this.Status.SetTo(status);
         }
 
@@ -87,7 +87,7 @@
                 throw new ArgumentException("Invalid date provided to stage task to stak", nameof(date));
 
             this.Timeline.StagedFor = date;
-            this.Timeline.LastModifiedOn = DateTime.UtcNow;
+            this.Timeline.LastModifiedOn = DateTimeOffset.Now;
         }
 
         public void Unblock()
@@ -95,7 +95,7 @@
             if (!this.IsBlocked)
                 throw new TaskStakException("Cannot unblock an unblocked task.");
 
-            this.Timeline.LastModifiedOn = DateTime.UtcNow;
+            this.Timeline.LastModifiedOn = DateTimeOffset.Now;
             this.Status.SetTo(TaskEntryStatus.Active);
         }
         #endregion

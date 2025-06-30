@@ -1,10 +1,10 @@
 ﻿namespace TaskStak.CLI.Presentation.Formatters
 {
-    public class DateTimeAgoFormatter : ITaskStakFormatter<DateTime>
+    public class DateTimeAgoFormatter : ITaskStakFormatter<DateTimeOffset>
     {
-        public string Format(DateTime date)
+        public string Format(DateTimeOffset date)
         {
-            var timeSpan = DateTime.UtcNow - date;
+            var timeSpan = DateTimeOffset.Now - date;
 
             if (timeSpan.TotalMinutes < 1)
             {

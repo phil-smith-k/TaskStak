@@ -71,7 +71,7 @@ namespace TaskStak.CLI.Presentation.Views
                     continue;
                 }
 
-                var completedDate = DateOnly.FromDateTime(task.Timeline.CompletedOn ?? DateTime.MinValue);
+                var completedDate = DateOnly.FromDateTime(task.Timeline.CompletedOn?.Date ?? DateTime.MinValue);
                 if (task.IsCompleted && completedDate == _options.Date)
                 {
                     completed.Add(task);

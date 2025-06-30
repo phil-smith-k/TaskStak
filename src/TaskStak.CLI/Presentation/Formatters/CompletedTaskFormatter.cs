@@ -5,7 +5,7 @@ namespace TaskStak.CLI.Presentation.Formatters
 {
     public class CompletedTaskFormatter : TaskFormatterBase
     {
-        private readonly ITaskStakFormatter<DateTime> _verboseFormatter = new DateTimeVerboseFormatter();
+        private readonly ITaskStakFormatter<DateTimeOffset> _verboseFormatter = new DateTimeVerboseFormatter();
 
         public override string Format(TaskEntry taskEntry)
         {

@@ -21,9 +21,9 @@ namespace TaskStak.CLI.Utils
         {
             return new Timeline
             {
-                CreatedOn = source.CreatedOn.ToLocalTimeSpecifyKind(DateTimeKind.Utc),
-                CompletedOn = source.CompletedOn?.ToLocalTimeSpecifyKind(DateTimeKind.Utc),
-                LastModifiedOn = source.LastModifiedOn?.ToLocalTimeSpecifyKind(DateTimeKind.Utc),
+                CreatedOn = source.CreatedOn,
+                CompletedOn = source.CompletedOn,
+                LastModifiedOn = source.LastModifiedOn,
                 StagedFor = source.StagedFor,
             };
         }
