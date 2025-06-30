@@ -18,7 +18,7 @@ namespace TaskStak.CLI.Presentation.Views
 
         public void RenderTasks(IEnumerable<TaskEntry> tasks)
         {
-            var unstagedTasks = tasks.Where(tsk => !tsk.IsStaged && !tsk.IsCompleted).ToList();
+            var unstagedTasks = tasks.Where(tsk => !tsk.IsStaged && tsk.IsActive).ToList();
 
             if (!unstagedTasks.Any()) 
             {
