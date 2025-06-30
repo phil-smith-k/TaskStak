@@ -34,6 +34,35 @@ namespace TaskStak.CLI.Utils
             return DateOnly.MinValue; // Invalid date argument format, return a sentinel value
         }
 
+        public static DateOnly? ParseOptionalDateArgument(ArgumentResult? result)
+        {
+            var today = DateTime.Today;
+
+            if (result == null)
+            {
+                return null;
+            }
+
+            var arg = result.Tokens.SingleOrDefault()?.Value;
+
+            if (string.IsNullOrWhiteSpace(arg))
+            {
+                return null;
+            }
+
+            if (TryParseDateArgument(arg, out var date))
+            {
+                return DateOnly.FromDateTime(date);
+            }
+
+            if (TryParseDayOfWeekArgument(arg, out var dayOfWeekDate))
+            {
+                return DateOnly.FromDateTime(dayOfWeekDate);
+            }
+
+            return DateOnly.MinValue; // Invalid date argument format, return a sentinel value
+        }
+
         private static bool TryParseDateArgument(string str, out DateTime date)
         {
             date = default;

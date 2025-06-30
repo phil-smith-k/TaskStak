@@ -10,7 +10,7 @@
 
             public static class Descriptions
             {
-                public const string DateDesc = "Represents a date. Use a date format or use --today, --tomorrow, --monday, --tuesday etc. Default is today's date.";
+                public const string DateDesc = "Represents a date. Use a date format or use --today | -t, --tomorrow | -tm, --monday | -mon, --tuesday | -tue etc.";
                 public const string QueryDesc = "Search query argument. Use id or title of task.";
                 public const string TitleDesc = "The title of the new or updated task.";
             }
@@ -60,6 +60,7 @@
         public static class Messages
         {
             public const string TaskAdded = $"{DisplaySymbol.Success} '{{0}}' added successfully.";
+            public const string TaskAddedOnDate = $"{DisplaySymbol.Success} '{{0}}' added successfully to {{1}} {{2}}";
             public const string TaskCompleted = $"{DisplaySymbol.Success} '{{0}}' completed successfully.";
             public const string TaskUpdated = $"{DisplaySymbol.Success} Task '{{0}}' updated from '{{1}}' to '{{2}}'";
             public const string TaskPopped = $"{DisplaySymbol.Success} Task '{{0}}' removed from {{1}} {{2}}";
