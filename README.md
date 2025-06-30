@@ -2,6 +2,29 @@
 
 A brutally fast, Git-like command line task management tool built for developers who value speed and simplicity.
 
+
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Commands](#commands)
+  - [`add`](#add---create-new-tasks)
+  - [`view`](#view---display-tasks)
+    - [`<date-argument>`](#date-arguments)
+    - [`--unstaged`](#unstaged-option)
+    - [`--verbose`](#verbose-option)
+  - [`done`](#done---complete-tasks)
+  - [`move`](#move---change-task-status)
+  - [`title`](#title---update-task-titles)
+  - [`rm`](#rm---remove-tasks)
+  - [`push`](#push---stage-tasks-for-specific-days)
+    - [`<date-argument>`](#date-argument-date-argument)
+    - [`--in <number>`](#in-option---in-number)
+  - [`pop`](#pop---unstage-tasks)
+- [Task Status](#task-status-system)
+- [Query Argument and Search](#search-system)
+- [Data Storage](#data-storage)
+- [Example Workflow](#example-workflow)
+- [License](#license)
+
 ## Installation
 
 Install TaskStak globally using the .NET CLI:
@@ -51,7 +74,22 @@ task view [<date-argument>] [--unstaged | -u] [--verbose | -v]
 ```
 
 #### Date Arguments
-View tasks staged for specific days using the same natural language patterns as the `push` command. See the [Date Argument section](#date-argument-date-argument) under the `push` command for complete details on available options.
+View tasks staged for specific days using the same natural language patterns as the `push` command. See [`<date-argument>`](#date-argument-date-argument) under the `push` command for complete details on available options.
+
+##### Stak for Today (Default)
+When running `task view` with no arguments, displays:
+- **Past staged tasks** (in yellow) - Tasks that were staged for previous days and need attention
+- **Active tasks** staged for today
+- **Blocked tasks** from any date (keeps dependencies visible and prevents them from being forgotten)  
+- **Tasks completed** today
+
+###### **Past Staged Tasks:**
+Tasks that were scheduled for previous days appear prominently at the top with a warning to ensure nothing gets lost or forgotten. These are shown in yellow with the number of days since they were originally staged (e.g., "from 3d ago").
+
+###### Staks for Other Dates
+When viewing other dates (ex. `task view --tomorrow`), displays:
+- Tasks staged for that specific day (active)
+- If past date, any tasks completed that day
 
 #### Unstaged Option
 - `--unstaged`, `-u` - Show tasks that have not yet been staged to a particular date (i.e., your backlog) Note: This option is mutually exclusive with any date argument. If you specify `--unstaged`, it will ignore any date argument provided.
@@ -69,21 +107,6 @@ task view --today --verbose         # Today's tasks with details
 task view --unstaged			    # Displays any tasks not yet staged to a task push
 task view --tomorrow -v             # Tomorrow's tasks with details
 ```
-
-#### Stak for Today (Default)
-When running `task view` with no arguments, displays:
-- **Past staged tasks** (in yellow) - Tasks that were staged for previous days and need attention
-- **Active tasks** staged for today
-- **Blocked tasks** from any date (keeps dependencies visible and prevents them from being forgotten)  
-- **Tasks completed** today
-
-**Past Staged Tasks:**
-Tasks that were scheduled for previous days appear prominently at the top with a warning to ensure nothing gets lost or forgotten. These are shown in yellow with the number of days since they were originally staged (e.g., "from 3d ago").
-
-#### Staks for Other Dates
-When viewing other dates (ex. `task view --tomorrow`), displays:
-- Tasks staged for that specific day (active)
-- If past date, any tasks completed that day
 
 ### `done` - Complete Tasks
 Mark a task as completed using fuzzy search.
@@ -203,7 +226,7 @@ task pop "prepare for sprint planning"   # removes task from staged date
 task view --unstaged                     # view unstaged
 ```
 
-## Task Status System
+## Task Status
 
 TaskStak uses a simple three-state system that reflects real development workflows:
 
