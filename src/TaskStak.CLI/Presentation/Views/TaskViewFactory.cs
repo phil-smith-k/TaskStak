@@ -7,19 +7,19 @@ namespace TaskStak.CLI.Presentation.Views
     {
         public static ITaskView GetViewFor(ListOptions options)
         {
-            var date = options.Date;
-
-            if (date == DateOnly.MinValue)
-                throw new ArgumentException("Date cannot be default value", nameof(options.Date));
-
-            if (date.IsToday())
+            if (options.Unstaged)
             {
-                return new TodayView(options);
+                return new UnstagedView(options);
             }
-            else
+
+            if (options.Date.HasValue)
             {
-                return new DateView(options);
+                return options.Date.IsToday() 
+                    ? new TodayView(options) 
+                    : new DateView(options);
             }
+
+            throw new ArgumentException("Invalid options provided for task view creation.", nameof(options));
         }
 
         public static ITaskView GetViewFor(DateOnly arg)

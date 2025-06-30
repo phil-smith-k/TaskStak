@@ -19,7 +19,7 @@ namespace TaskStak.CLI.Presentation.Sections
             }
 
             Console.Out.WriteLineColor(this.GetHeader(), _attentionColor);
-            foreach (var task in tasks.OrderByDescending(tsk => tsk.Timeline.StakDate ?? DateOnly.FromDateTime(tsk.Timeline.CreatedOn.Date)))
+            foreach (var task in tasks.OrderByDescending(tsk => tsk.Timeline.StagedFor ?? DateOnly.FromDateTime(tsk.Timeline.CreatedOn.Date)))
             {
                 Console.Out.WriteLineColor(formatter.Format(task), _attentionColor);
             }

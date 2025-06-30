@@ -19,6 +19,10 @@ namespace TaskStak.CLI.Commands
                 isDefault: true,
                 description: Constants.Arguments.Descriptions.DateDesc);
 
+            var unstagedOption = new Option<bool>(
+                aliases: [Constants.Options.Unstaged, Constants.Options.UnstagedAlias],
+                description: Constants.Options.Descriptions.UnstagedDesc);
+
             var verboseOption = new Option<bool>(
                 aliases: [Constants.Options.Verbose, Constants.Options.VerboseAlias], 
                 description: Constants.Options.Descriptions.VerboseDesc);
@@ -28,19 +32,21 @@ namespace TaskStak.CLI.Commands
             var command = new Command(Name, Description)
             {
                 dateArg,
+                unstagedOption,
                 verboseOption,
             };
 
-            command.SetHandler(Execute, dateArg, verboseOption);
+            command.SetHandler(Execute, dateArg, unstagedOption, verboseOption);
             return command;
         }
 
-        public static void Execute(DateOnly dateArg, bool verboseOption)
+        public static void Execute(DateOnly dateArg, bool unstaged, bool verboseOption)
         {
             var tasks = JsonHelper.LoadTasks();
             var options = new ListOptions
             {
                 Date = dateArg,
+                Unstaged = unstaged,
                 Verbose = verboseOption, 
             };
 

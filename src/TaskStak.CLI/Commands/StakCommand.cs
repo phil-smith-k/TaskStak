@@ -61,7 +61,7 @@ namespace TaskStak.CLI.Commands
                 .WithCriteria(criteria)
                 .OnTaskFound((tasks, task) =>
                 {
-                    task.StageToStak(dateStagedFor);
+                    task.StageToDate(dateStagedFor);
 
                     JsonHelper.SaveTasks(tasks);
 

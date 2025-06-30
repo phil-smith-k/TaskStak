@@ -73,6 +73,9 @@
             public const string Status = "--status";
             public const string StatusAlias = "-s";
 
+            public const string Unstaged = "--unstaged";
+            public const string UnstagedAlias = "-u";
+
             public const string Verbose = "--verbose";
             public const string VerboseAlias = "-v";
 
@@ -108,6 +111,7 @@
             {
                 public const string InDayDesc = "Add to stak N days from the current date.";
                 public const string StatusDesc = "The status of the task to add. Defaults to 'Active'.";
+                public const string UnstagedDesc = "When option is present, displays tasks not staged on a stak.";
                 public const string VerboseDesc = "When option is present, displays more task details.";
             }
         }

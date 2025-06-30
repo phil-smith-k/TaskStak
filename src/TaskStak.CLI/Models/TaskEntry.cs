@@ -22,7 +22,7 @@
              => !this.IsCompleted && this.IsStaged && this.Timeline.StagedFor < DateOnly.FromDateTime(DateTime.Today);
 
         public bool IsStaged
-            => !this.IsCompleted && this.Timeline.StagedFor.HasValue;
+            => this.Timeline.StagedFor.HasValue;
         #endregion
 
         #region Public Methods
@@ -76,12 +76,12 @@
         public void SetStatusTo(TaskEntryStatus status)
             => this.Status.SetTo(status);
 
-        public void StageToStak(DateTime date)
+        public void StageToDate(DateTime date)
         {
-            this.StageToStak(DateOnly.FromDateTime(date));
+            this.StageToDate(DateOnly.FromDateTime(date));
         }
 
-        public void StageToStak(DateOnly date)
+        public void StageToDate(DateOnly date)
         {
             if (date == DateOnly.MinValue)
                 throw new ArgumentException("Invalid date provided to stage task to stak", nameof(date));

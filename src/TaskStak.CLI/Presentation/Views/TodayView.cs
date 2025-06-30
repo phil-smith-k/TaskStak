@@ -42,7 +42,7 @@ namespace TaskStak.CLI.Presentation.Views
             var overdue = tasks.Where(task => task.IsOverdue && !task.IsBlocked).ToList();
             if (overdue.Any())
             {
-                sections.Insert(0, new OverdueSection(overdue, verbose ? new VerboseTaskFormatter() : new OverdueTaskFormatter()));
+                sections.Insert(0, new NeedsAttentionSection(overdue, verbose ? new VerboseTaskFormatter() : new TaskNeedsAttentionFormatter()));
             }
 
             Console.WriteLine(_headerFormatter.Format(this.Title));
