@@ -98,6 +98,15 @@
             this.Timeline.LastModifiedOn = DateTimeOffset.Now;
             this.Status.SetTo(TaskEntryStatus.Active);
         }
+
+        public void Unstage()
+        {
+            if (!this.IsStaged)
+                throw new TaskStakException("Cannot unstage an unstaged task.");
+
+            this.Timeline.StagedFor = null;
+            this.Timeline.LastModifiedOn = DateTimeOffset.Now;
+        }
         #endregion
 
         #region Static Methods

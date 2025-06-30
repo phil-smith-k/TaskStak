@@ -21,6 +21,7 @@
             public const string Add = "add";
             public const string Done = "done";
             public const string Move = "move";
+            public const string Pop = "pop";
             public const string Push = "push";
             public const string Remove = "rm";
             public const string Title = "title";
@@ -28,10 +29,11 @@
 
             public static class Descriptions
             {
-                public const string AddDesc = "Add a task to your stak.";
+                public const string AddDesc = "Add a task.";
                 public const string DoneDesc = "Mark a task complete.";
                 public const string MoveDesc = "Move a task to a different status.";
-                public const string PushDesc = "Stage a task to a stak for a particular date."; 
+                public const string PopDesc = "Unstage a task from a stak."; 
+                public const string PushDesc = "Stage a task to a stak for a particular date.";
                 public const string RemoveDesc = "Removes a task completely. Cannot be undone.";
                 public const string TitleDesc = "Update the title of an existing task.";
                 public const string ViewDesc = "View current tasks in stak.";
@@ -60,6 +62,7 @@
             public const string TaskAdded = $"{DisplaySymbol.Success} '{{0}}' added successfully.";
             public const string TaskCompleted = $"{DisplaySymbol.Success} '{{0}}' completed successfully.";
             public const string TaskUpdated = $"{DisplaySymbol.Success} Task '{{0}}' updated from '{{1}}' to '{{2}}'";
+            public const string TaskPopped = $"{DisplaySymbol.Success} Task '{{0}}' removed from {{1}} {{2}}";
             public const string TaskPushed = $"{DisplaySymbol.Success} Task '{{0}}' pushed to {{1}} {{2}}";
             public const string TaskRemoved = $"{DisplaySymbol.Success} Task '{{0}}' removed.";
             public const string CandidatesFound = $"{DisplaySymbol.Warning} Multiple tasks found. Refine your query or use 8-digit task identifier.";

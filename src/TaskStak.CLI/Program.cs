@@ -18,6 +18,7 @@ var rootCommand = new RootCommand("TaskStak - A developer-focused, performant ta
     DoneCommand.Create(),
     MoveCommand.Create(),
     RemoveCommand.Create(),
+    PopCommand.Create(),
     PushCommand.Create(),
     TitleCommand.Create(),
     ViewCommand.Create(),
