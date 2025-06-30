@@ -189,6 +189,20 @@ task push "release prep" 2025-02-01      # Stage for specific date
 task push "planning session" -mon        # Stage for next Monday
 ```
 
+### `pop` - Unstage Tasks
+Unstage tasks from any date, moving them back to your backlog or unstaged tasks.
+
+```bash
+task pop <query>
+```
+
+**Examples:**
+```bash
+task pop "prepare for sprint planning"   # removes task from staged date
+
+task view --unstaged                     # view unstaged
+```
+
 ## Task Status System
 
 TaskStak uses a simple three-state system that reflects real development workflows:
@@ -256,6 +270,7 @@ task add "code review for authentication PR"
 task push "registration API" --today
 task push "CSS issues" --wednesday  
 task push "code review" --friday
+task push 
 
 # During the day
 task view                              # Check what's on deck for today
@@ -263,9 +278,11 @@ task view --tomorrow                   # Plan tomorrow's work
 task view --unstaged                   # Review backlog tasks
 task done "registration"               # Mark progress
 task move "CSS issues" -s blocked      # Waiting on designer
+task pop "code review"                 # Move to backlog, no longer a priority 
 
-# Weekly review
-task view --tomorrow --verbose         # Review tomorrow's tasks with details
+# End of the week
+task view							   # Review completed tasks for the day
+task push "fix bug" --mon			   # Push incomplete tasks for the following week
 
 # Clean up
 task rm "old prototype"                # Remove obsolete tasks

@@ -47,6 +47,7 @@ namespace TaskStak.CLI.Commands
 
                     Console.WriteLine(Constants.Messages.TaskPopped, task.Title, dateStagedFor.ToString("ddd", CultureInfo.CurrentCulture), dateStagedFor.ToString("d", CultureInfo.CurrentCulture));
                 });
+
             searchCommand.Execute();
         }
     }
