@@ -4,9 +4,9 @@ using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Presentation.Sections
 {
-    public class OverdueSection(IEnumerable<TaskEntry> tasks, ITaskStakFormatter<TaskEntry> formatter) : ISectionView
+    public class NeedsAttentionSection(IEnumerable<TaskEntry> tasks, ITaskStakFormatter<TaskEntry> formatter) : ISectionView
     {
-        private readonly ConsoleColor _overdueColor = ConsoleColor.DarkYellow;
+        private readonly ConsoleColor _attentionColor = ConsoleColor.DarkYellow;
 
         public string Title => Constants.DisplaySymbol.Warning;
 
@@ -18,10 +18,10 @@ namespace TaskStak.CLI.Presentation.Sections
                 return;
             }
 
-            Console.Out.WriteLineColor(this.GetHeader(), _overdueColor);
-            foreach (var task in tasks.OrderByDescending(tsk => tsk.Timeline.StagedFor))
+            Console.Out.WriteLineColor(this.GetHeader(), _attentionColor);
+            foreach (var task in tasks.OrderByDescending(tsk => tsk.Timeline.StakDate ?? DateOnly.FromDateTime(tsk.Timeline.CreatedOn.Date)))
             {
-                Console.Out.WriteLineColor(formatter.Format(task), _overdueColor);
+                Console.Out.WriteLineColor(formatter.Format(task), _attentionColor);
             }
 
             Console.WriteLine();
