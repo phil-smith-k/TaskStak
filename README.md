@@ -6,21 +6,15 @@ A brutally fast, Git-like command line task management tool built for developers
 - [Installation](#installation)
 - [Quick Start](#quick-start)
 - [Commands](#commands)
-  - [`add`](#add---create-new-tasks)
-    - [`<date-argument>`](#date-arguments)
-  - [`view`](#view---display-tasks)
-    - [`<date-argument>`](#date-arguments)
-    - [`--unstaged`](#unstaged-option)
-    - [`--verbose`](#verbose-option)
-  - [`done`](#done---complete-tasks)
-  - [`move`](#move---change-task-status)
-  - [`title`](#title---update-task-titles)
-  - [`rm`](#rm---remove-tasks)
-  - [`push`](#push---stage-tasks-for-specific-days)
-    - [`<date-argument>`](#date-argument-date-argument)
-    - [`--in <number>`](#in-option---in-number)
-  - [`pop`](#pop---unstage-tasks)
-- [Task Status](#task-status-system)
+  - [`add`](#add)
+  - [`view`](#view)
+  - [`done`](#done)
+  - [`move`](#move)
+  - [`title`](#title)
+  - [`rm`](#rm)
+  - [`push`](#push)
+  - [`pop`](#pop)
+- [Task Status](#task-status)
 - [Query Argument and Search](#search-system)
 - [Data Storage](#data-storage)
 - [Example Workflow](#example-workflow)
@@ -156,7 +150,7 @@ task title "memory leak" "fix memory leak in JSON parser module"
 task title "docs" "update API documentation with examples"
 ```
 
-### `rm` - Remove Tasks
+### `rm`
 Permanently delete a task.
 
 ```bash
