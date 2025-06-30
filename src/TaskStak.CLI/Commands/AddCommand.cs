@@ -46,22 +46,22 @@ namespace TaskStak.CLI.Commands
             var tasks = JsonHelper.LoadTasks();
 
             var task = TaskEntry.New(titleArg, status);
-            tasks.Add(task);
-
             if (dateArg.HasValue)
             {
                 task.StageToDate(dateArg.Value);
+
+                tasks.Add(task);
+                JsonHelper.SaveTasks(tasks);
 
                 Console.WriteLine(Constants.Messages.TaskAddedOnDate, task.Title, dateArg?.ToString("ddd", CultureInfo.CurrentCulture), dateArg?.ToString("d", CultureInfo.CurrentCulture));
             }
             else
             {
+                tasks.Add(task);
                 JsonHelper.SaveTasks(tasks);
 
                 Console.WriteLine(Constants.Messages.TaskAdded, titleArg);
             }
-
-
         }
 
         private static TaskEntryStatus ParseStatusArgument(ArgumentResult argResult)
