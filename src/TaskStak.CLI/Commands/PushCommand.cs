@@ -6,10 +6,10 @@ using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Commands
 {
-    public class StakCommand : ITaskStakCommand
+    public class PushCommand : ITaskStakCommand
     {
-        public static string Name => Constants.Commands.Stak;
-        public static string Description => Constants.Commands.Descriptions.StakDesc;
+        public static string Name => Constants.Commands.Push;
+        public static string Description => Constants.Commands.Descriptions.PushDesc;
 
         public static Command Create()
         {
@@ -65,7 +65,7 @@ namespace TaskStak.CLI.Commands
 
                     JsonHelper.SaveTasks(tasks);
 
-                    Console.WriteLine(Constants.Messages.TaskAddedToStak, task.Title, dateStagedFor.ToString("ddd", CultureInfo.CurrentCulture), dateStagedFor.ToString("d", CultureInfo.CurrentCulture));
+                    Console.WriteLine(Constants.Messages.TaskPushed, task.Title, dateStagedFor.ToString("ddd", CultureInfo.CurrentCulture), dateStagedFor.ToString("d", CultureInfo.CurrentCulture));
                 })
                 .OnNoResult(() =>
                 {

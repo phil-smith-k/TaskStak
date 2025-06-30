@@ -23,13 +23,13 @@ task view
 task done "auth"
 
 # Stage a task for tomorrow
-task stak "auth" --tomorrow
+task push "auth" --tomorrow
 ```
 
 ## Commands
 
 ### `add` - Create New Tasks
-Add a task to your stak with optional status.
+Add a new task.
 
 ```bash
 task add <title> [--status | -s <active|blocked|completed>]
@@ -51,7 +51,7 @@ task view [<date-argument>] [--unstaged | -u] [--verbose | -v]
 ```
 
 #### Date Arguments
-View tasks staged for specific days using the same natural language patterns as the `stak` command. See the [Date Argument section](#date-argument-date-argument) under the `stak` command for complete details on available options.
+View tasks staged for specific days using the same natural language patterns as the `push` command. See the [Date Argument section](#date-argument-date-argument) under the `push` command for complete details on available options.
 
 #### Unstaged Option
 - `--unstaged`, `-u` - Show tasks that have not yet been staged to a particular date (i.e., your backlog) Note: This option is mutually exclusive with any date argument. If you specify `--unstaged`, it will ignore any date argument provided.
@@ -61,12 +61,12 @@ View tasks staged for specific days using the same natural language patterns as 
 
 **Examples:**
 ```bash
-task view                           # Today's stak (default)
+task view                           # Today's push (default)
 task view --tomorrow                # Tomorrow's staged tasks
 task view --friday                  # Friday's staged tasks
 task view 2025-01-15                # Tasks staged for specific date
 task view --today --verbose         # Today's tasks with details
-task view --unstaged			    # Displays any tasks not yet staged to a task stak
+task view --unstaged			    # Displays any tasks not yet staged to a task push
 task view --tomorrow -v             # Tomorrow's tasks with details
 ```
 
@@ -129,7 +129,7 @@ task title "docs" "update API documentation with examples"
 ```
 
 ### `rm` - Remove Tasks
-Permanently delete a task from your stak.
+Permanently delete a task.
 
 ```bash
 task rm <query>
@@ -144,11 +144,11 @@ task rm "test"                      # Remove test task
 
 **⚠️ Warning:** This action permanently deletes the task and cannot be undone. 
 
-### `stak` - Stage Tasks for Specific Days
+### `push` - Stage Tasks for Specific Days
 Stage tasks for future work on specific days using natural language or date formats.
 
 ```bash
-task stak <query> [<date-argument>] [--in <number>]
+task push <query> [<date-argument>] [--in <number>]
 ```
 
 #### Date Argument `<date-argument>`
@@ -181,12 +181,12 @@ The date argument provides an intuitive way to stage tasks using natural languag
 
 **Examples:**
 ```bash
-task stak "auth work"                    # Stage for today
-task stak "code review" --tomorrow       # Stage for tomorrow
-task stak "team meeting" --friday        # Stage for next Friday
-task stak "deployment" --in 7            # Stage 7 days from today
-task stak "release prep" 2025-02-01      # Stage for specific date
-task stak "planning session" -mon        # Stage for next Monday
+task push "auth work"                    # Stage for today
+task push "code review" --tomorrow       # Stage for tomorrow
+task push "team meeting" --friday        # Stage for next Friday
+task push "deployment" --in 7            # Stage 7 days from today
+task push "release prep" 2025-02-01      # Stage for specific date
+task push "planning session" -mon        # Stage for next Monday
 ```
 
 ## Task Status System
@@ -253,9 +253,9 @@ task add "fix CSS issues in dashboard"
 task add "code review for authentication PR"
 
 # Organize the week
-task stak "registration API" --today
-task stak "CSS issues" --wednesday  
-task stak "code review" --friday
+task push "registration API" --today
+task push "CSS issues" --wednesday  
+task push "code review" --friday
 
 # During the day
 task view                              # Check what's on deck for today
