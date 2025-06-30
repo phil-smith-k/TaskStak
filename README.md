@@ -7,6 +7,7 @@ A brutally fast, Git-like command line task management tool built for developers
 - [Quick Start](#quick-start)
 - [Commands](#commands)
   - [`add`](#add---create-new-tasks)
+    - [`<date-argument>`](#date-arguments)
   - [`view`](#view---display-tasks)
     - [`<date-argument>`](#date-arguments)
     - [`--unstaged`](#unstaged-option)
@@ -51,29 +52,33 @@ task push "auth" --tomorrow
 
 ## Commands
 
-### `add` - Create New Tasks
+### `add`
 Add a new task.
 
 ```bash
-task add <title> [--status | -s <active|blocked|completed>]
+task add <title> [<date-argument>] [--status | -s <active|blocked|completed>]
 ```
+
+#### Date Argument (optional)
+To add a task to specific a day use the date optional date argument. If not supplied, the task will be added to your unstaged tasks. Uses the same natural language patterns as the `push` command. See [`<date-argument>`](#date-argument-date-argument) under the `push` command for complete details on available options.
 
 **Examples:**
 ```bash
-task add "implement OAuth2 integration"
+task add "implement OAuth2 integration" --today
 task add "fix memory leak in parser" -s active
 task add "waiting for API keys" -s blocked
 task add "update documentation" --status completed
+task add "plan database integration" 20250705 
 ```
 
-### `view` - Display Tasks
+### `view`
 View tasks staged for specific days using natural language date arguments.
 
 ```bash
 task view [<date-argument>] [--unstaged | -u] [--verbose | -v]
 ```
 
-#### Date Arguments
+#### Date Argument
 View tasks staged for specific days using the same natural language patterns as the `push` command. See [`<date-argument>`](#date-argument-date-argument) under the `push` command for complete details on available options.
 
 ##### Stak for Today (Default)
@@ -108,7 +113,7 @@ task view --unstaged			    # Displays any tasks not yet staged to a task push
 task view --tomorrow -v             # Tomorrow's tasks with details
 ```
 
-### `done` - Complete Tasks
+### `done`
 Mark a task as completed using fuzzy search.
 
 ```bash
@@ -122,7 +127,7 @@ task done "memory leak"             # Matches "fix memory leak in parser"
 task done "OAuth2 integration"      # Exact phrase matching
 ```
 
-### `move` - Change Task Status
+### `move`
 Update the status of an existing task.
 
 ```bash
@@ -137,7 +142,7 @@ task move "documentation" -s completed      # Mark documentation task as complet
 task move "API integration" -s a            # Using status shortcuts
 ```
 
-### `title` - Update Task Titles
+### `title`
 Modify the title of an existing task.
 
 ```bash
@@ -167,14 +172,14 @@ task rm "test"                      # Remove test task
 
 **⚠️ Warning:** This action permanently deletes the task and cannot be undone. 
 
-### `push` - Stage Tasks for Specific Days
+### `push`
 Stage tasks for future work on specific days using natural language or date formats.
 
 ```bash
 task push <query> [<date-argument>] [--in <number>]
 ```
 
-#### Date Argument `<date-argument>`
+#### `<date-argument>`
 The date argument provides an intuitive way to stage tasks using natural language, designed to speed up the staging process. You can use the natural language options, aliases for common days, or standard date formats.
 
 **Natural Language Options:**
@@ -198,7 +203,7 @@ The date argument provides an intuitive way to stage tasks using natural languag
 - `dd-MMM-yyyy` - Month name format (e.g., `15-Jan-2025`)
 - Local date formats - Falls back to your system's date parsing for additional flexibility
 
-#### In Option `--in <number>`
+#### `--in <number>`
 - `--in <number>` - Stage 'n' days from today; must be a non-negative value
 - **Note:** Cannot be combined with the date argument. Use either the date argument or the `--in` option, or neither to default to today's stak.
 
@@ -212,7 +217,7 @@ task push "release prep" 2025-02-01      # Stage for specific date
 task push "planning session" -mon        # Stage for next Monday
 ```
 
-### `pop` - Unstage Tasks
+### `pop`
 Unstage tasks from any date, moving them back to your backlog or unstaged tasks.
 
 ```bash
