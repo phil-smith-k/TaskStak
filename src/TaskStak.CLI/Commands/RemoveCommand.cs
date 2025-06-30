@@ -28,6 +28,7 @@ namespace TaskStak.CLI.Commands
             var criteria = new TaskSearchCriteria()
             {
                 Query = queryArg,
+                StatusFlags = TaskEntryStatus.All,
             };
 
             command
