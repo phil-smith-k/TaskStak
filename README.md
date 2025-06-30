@@ -47,14 +47,17 @@ task add "update documentation" --status completed
 View tasks staged for specific days using natural language date arguments.
 
 ```bash
-task view [<date-argument>] [--verbose | -v]
+task view [<date-argument>] [--unstaged | -u] [--verbose | -v]
 ```
 
 #### Date Arguments
 View tasks staged for specific days using the same natural language patterns as the `stak` command. See the [Date Argument section](#date-argument-date-argument) under the `stak` command for complete details on available options.
 
-#### Verbose Mode
-- `--verbose`, `-v` - Show detailed information including task IDs and timestamps
+#### Unstaged Option
+- `--unstaged`, `-u` - Show tasks that have not yet been staged to a particular date (i.e., your backlog) Note: This option is mutually exclusive with any date argument. If you specify `--unstaged`, it will ignore any date argument provided.
+
+#### Verbose Option
+- `--verbose`, `-v` - Show detailed information including task IDs and timestamps. May be used in combination with any other argument or option
 
 **Examples:**
 ```bash
@@ -63,18 +66,19 @@ task view --tomorrow                # Tomorrow's staged tasks
 task view --friday                  # Friday's staged tasks
 task view 2025-01-15                # Tasks staged for specific date
 task view --today --verbose         # Today's tasks with details
+task view --unstaged			    # Displays any tasks not yet staged to a task stak
 task view --tomorrow -v             # Tomorrow's tasks with details
 ```
 
 #### Stak for Today (Default)
 When running `task view` with no arguments, displays:
-- **Past staged tasks** (in red) - Tasks that were staged for previous days and need attention
+- **Past staged tasks** (in yellow) - Tasks that were staged for previous days and need attention
 - **Active tasks** staged for today
 - **Blocked tasks** from any date (keeps dependencies visible and prevents them from being forgotten)  
 - **Tasks completed** today
 
 **Past Staged Tasks:**
-Tasks that were scheduled for previous days appear prominently at the top with a warning to ensure nothing gets lost or forgotten. These are shown in red with the number of days since they were originally staged (e.g., "from 3d ago").
+Tasks that were scheduled for previous days appear prominently at the top with a warning to ensure nothing gets lost or forgotten. These are shown in yellow with the number of days since they were originally staged (e.g., "from 3d ago").
 
 #### Staks for Other Dates
 When viewing other dates (ex. `task view --tomorrow`), displays:
@@ -256,6 +260,7 @@ task stak "code review" --friday
 # During the day
 task view                              # Check what's on deck for today
 task view --tomorrow                   # Plan tomorrow's work
+task view --unstaged                   # Review backlog tasks
 task done "registration"               # Mark progress
 task move "CSS issues" -s blocked      # Waiting on designer
 
