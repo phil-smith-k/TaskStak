@@ -1,41 +1,42 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Parsing;
 using TaskStak.CLI.Models;
-using TaskStak.CLI.Presentation;
 using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Commands
 {
-    public class MoveCommand : ITaskStakCommand
+    internal class EditCommand : ITaskStakCommand
     {
-        public static string Name => Constants.Commands.Move;
-        public static string Description => Constants.Commands.Descriptions.MoveDesc;
+        public static string Name => Constants.Commands.Edit;
+        public static string Description => Constants.Commands.Descriptions.EditDesc;
 
         public static Command Create()
         {
             var queryArg = new Argument<string>(Constants.Arguments.Query, Constants.Arguments.Descriptions.QueryDesc);
-            var statusOption = new Option<TaskEntryStatus>(
+
+            var statusOption = new Option<TaskEntryStatus?>(
                 aliases: [Constants.Options.Status, Constants.Options.StatusAlias],
-                parseArgument: ParseArgument,
+                parseArgument: ParseStatusArgument,
                 isDefault: true,
                 Constants.Options.Descriptions.StatusDesc);
+
+            var titleOption = new Option<string>(
+                aliases: [Constants.Options.Title, Constants.Options.TitleAlias], 
+                description: Constants.Arguments.Descriptions.TitleDesc);
 
             var command = new Command(Name, Description)
             {
                 queryArg,
                 statusOption,
+                titleOption,
             };
 
-            command.SetHandler(Execute, queryArg, statusOption);
-            command.IsHidden = true; // [Deprecated] Hide this command from the main help output
-
+            command.SetHandler(Execute, queryArg, statusOption, titleOption);
             return command;
         }
 
-        public static void Execute(string queryArg, TaskEntryStatus status)
+        private static void Execute(string queryArg, TaskEntryStatus? statusOption, string titleOption)
         {
-            Console.Out.WriteLineColor(Constants.Messages.CommandDeprecationWarning, ConsoleColor.DarkYellow, Constants.Commands.Move, "1.2.0", Constants.Commands.Edit);
-
             var command = new TaskSearchCommand();
             var criteria = new TaskSearchCriteria
             {
@@ -47,24 +48,23 @@ namespace TaskStak.CLI.Commands
                 .WithCriteria(criteria)
                 .OnTaskFound((tasks, task) =>
                 {
-                    var original = task.Status.Value;
-
-                    task.EditStatus(status);
+                    var isUpdated = task.Edit(statusOption, titleOption);
                     JsonHelper.SaveTasks(tasks);
 
-                    Console.WriteLine(Constants.Messages.TaskUpdated, nameof(task.Status).ToLowerInvariant(), original, task.Status.Value);
+                    if (isUpdated)
+                        Console.WriteLine(Constants.Messages.TaskUpdated, task.Title);
                 });
 
             command.Execute();
         }
 
-        private static TaskEntryStatus ParseArgument(ArgumentResult argResult)
+        private static TaskEntryStatus? ParseStatusArgument(ArgumentResult argResult)
         {
             var result = TaskEntryStatus.Active;
             var arg = argResult.Tokens.SingleOrDefault()?.Value;
 
             if (string.IsNullOrWhiteSpace(arg))
-                return result;
+                return null;
 
             var parsed = Enum.TryParse(arg, ignoreCase: true, out result);
             if (parsed)
@@ -80,6 +80,16 @@ namespace TaskStak.CLI.Commands
             };
 
             return result;
+        }
+
+        private static void ValidateDateArg(ArgumentResult result)
+        {
+            var date = result.GetValueForArgument(result.Argument) as DateOnly?;
+
+            if (date == DateOnly.MinValue) // Sentinel value indicates argument was supplied, but parsing failed
+            {
+                result.ErrorMessage = "Invalid date format. Use any standard date format or use --today, --tomorrow, --monday, --tuesday, etc.";
+            }
         }
     }
 }

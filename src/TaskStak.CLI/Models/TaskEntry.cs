@@ -44,6 +44,25 @@
             this.Status.SetTo(TaskEntryStatus.Completed);
         }
 
+        public bool Edit(TaskEntryStatus? statusArg, string titleArg)
+        {
+            var originalStatus = this.Status.Value;
+            var originalTitle = this.Title;
+
+            if (statusArg.HasValue)
+            {
+                this.EditStatus(statusArg.Value);
+            }
+
+            if (!string.IsNullOrWhiteSpace(titleArg) && this.Title != titleArg)
+            {
+                this.Title = titleArg;
+                this.Timeline.LastModifiedOn = DateTimeOffset.Now;
+            }
+
+            return originalTitle != this.Title || originalStatus != this.Status.Value;
+        }
+
         public void EditStatus(TaskEntryStatus status)
         {
             if (this.Status.Is(status))
@@ -85,6 +104,9 @@
         {
             if (date == DateOnly.MinValue)
                 throw new ArgumentException("Invalid date provided to stage task to stak", nameof(date));
+
+            if (date == this.Timeline.StagedFor)
+                return;
 
             this.Timeline.StagedFor = date;
             this.Timeline.LastModifiedOn = DateTimeOffset.Now;

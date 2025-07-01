@@ -1,5 +1,6 @@
 ﻿using System.CommandLine;
 using TaskStak.CLI.Models;
+using TaskStak.CLI.Presentation;
 using TaskStak.CLI.Utils;
 
 namespace TaskStak.CLI.Commands
@@ -21,11 +22,15 @@ namespace TaskStak.CLI.Commands
             };
 
             command.SetHandler(Execute, queryArg, titleArg);
+            command.IsHidden = true; // [Deprecated] Hide this command from the main help output
+
             return command;
         }
 
         public static void Execute(string queryArg, string titleArg)
         {
+            Console.Out.WriteLineColor(Constants.Messages.CommandDeprecationWarning, ConsoleColor.DarkYellow, Constants.Commands.Title, "1.2.0", Constants.Commands.Edit);
+
             var command = new TaskSearchCommand();
             var criteria = new TaskSearchCriteria
             {

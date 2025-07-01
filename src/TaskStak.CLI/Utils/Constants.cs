@@ -20,6 +20,7 @@
         {
             public const string Add = "add";
             public const string Done = "done";
+            public const string Edit = "edit";
             public const string Move = "move";
             public const string Pop = "pop";
             public const string Push = "push";
@@ -31,6 +32,7 @@
             {
                 public const string AddDesc = "Add a task.";
                 public const string DoneDesc = "Mark a task complete.";
+                public const string EditDesc = "Update task properties.";
                 public const string MoveDesc = "Move a task to a different status.";
                 public const string PopDesc = "Unstage a task from a stak."; 
                 public const string PushDesc = "Stage a task to a stak for a particular date.";
@@ -62,13 +64,14 @@
             public const string TaskAdded = $"{DisplaySymbol.Success} '{{0}}' added successfully.";
             public const string TaskAddedOnDate = $"{DisplaySymbol.Success} '{{0}}' added successfully to {{1}} {{2}}";
             public const string TaskCompleted = $"{DisplaySymbol.Success} '{{0}}' completed successfully.";
-            public const string TaskUpdated = $"{DisplaySymbol.Success} Task '{{0}}' updated from '{{1}}' to '{{2}}'";
+            public const string TaskUpdated = $"{DisplaySymbol.Success} Task '{{0}}' successfully updated.";
             public const string TaskPopped = $"{DisplaySymbol.Success} Task '{{0}}' removed from {{1}} {{2}}";
             public const string TaskPushed = $"{DisplaySymbol.Success} Task '{{0}}' pushed to {{1}} {{2}}";
             public const string TaskRemoved = $"{DisplaySymbol.Success} Task '{{0}}' removed.";
             public const string CandidatesFound = $"{DisplaySymbol.Warning} Multiple tasks found. Refine your query or use 8-digit task identifier.";
             public const string NoTasksFound = $"{DisplaySymbol.Error} No tasks found.";
             public const string QueryNotFoundInStatus = $"{DisplaySymbol.Error} Query '{{0}}' found no results in {{1}} status.";
+            public const string CommandDeprecationWarning = $"{DisplaySymbol.Warning} The '{{0}}' command is deprecated and will be removed in 'v{{1}}'. Use '{{2}}' instead.";
         }
 
         public static class Options
@@ -76,6 +79,9 @@
             public const string InDay = "--in";
             public const string Status = "--status";
             public const string StatusAlias = "-s";
+
+            public const string Title = "--title";
+            public const string TitleAlias = "-t";
 
             public const string Unstaged = "--unstaged";
             public const string UnstagedAlias = "-u";

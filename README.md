@@ -9,8 +9,9 @@ A brutally fast, Git-like command line task management tool built for developers
   - [`add`](#add)
   - [`view`](#view)
   - [`done`](#done)
-  - [`move`](#move)
-  - [`title`](#title)
+  - [`edit`](#edit)
+  - [`move (deprecated)`](#move)
+  - [`title (deprecated)`](#title)
   - [`rm`](#rm)
   - [`push`](#push)
   - [`pop`](#pop)
@@ -153,7 +154,44 @@ task done "memory leak"             # Matches "fix memory leak in parser"
 task done "OAuth2 integration"      # Exact phrase matching
 ```
 
-### `move`
+### `edit`
+Update the title or status of an existing task.
+
+```bash
+task edit <query> [--title | -t] [--status | -s <active|blocked|completed>]
+```
+
+#### Arguments
+
+- **`<query>`** - Search term to find the task you want to update. Uses fuzzy search to match task titles. See [`<query>`](#query) for search details.
+
+#### Options
+
+- **`--title`** - The new title/description for the task
+- **`--status`, `-s`** - The new status for the task. Accepts `active`, `blocked`, or `completed` (or their shortcuts `a`, `b`, `c`). See [`more about status`](#status) for additional details.
+
+#### Examples
+```bash
+# update status
+
+task edit "auth" -s blocked    
+```
+
+```bash
+# update title 
+
+task edit "memory leak" --title "JIRA-123 memory leak"  
+```
+
+```bash
+# update both title and status
+
+task move "documentation" -s completed -t "update documentation"       
+```
+
+### ⚠️ `move` 
+Deprecated as of `v1.1.2`, to be removed in `v1.2.0`. Use [`edit`](#edit) instead.
+
 Update the status of an existing task.
 
 ```bash
@@ -176,7 +214,8 @@ task move "documentation" -s completed      # Mark documentation task as complet
 task move "API integration" -s a            # Using status shortcuts
 ```
 
-### `title`
+### ⚠️ `title`
+Deprecated as of `v1.1.2`; to be removed in `v1.2.0`. Use [`edit`](#edit) instead.
 Modify the title of an existing task.
 
 ```bash
