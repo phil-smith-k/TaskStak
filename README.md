@@ -55,8 +55,6 @@ Add a new task.
 task add <title> [<date-argument>] [--status | -s <active|blocked|completed>]
 ```
 
-To add a task to specific a day use the date optional date argument. If not supplied, the task will be added to your unstaged tasks.  See [`<date-argument>`](#date-argument) for complete documentation.
-
 #### Arguments
 
 - **`<title>`** - The title or description of the task you want to create
@@ -367,8 +365,8 @@ task move "CSS issues" -s blocked      # Waiting on designer
 task pop "code review"                 # Move to backlog, no longer a priority 
 
 # End of the week
-task view							   # Review completed tasks for the day
-task push "fix bug" --mon			   # Push incomplete tasks for the following week
+task view                              # Review completed tasks for the day
+task push "fix bug" --mon              # Push incomplete tasks for the following week
 
 # Clean up
 task rm "old prototype"                # Remove obsolete tasks
