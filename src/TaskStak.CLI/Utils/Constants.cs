@@ -90,6 +90,9 @@
             public const string VerboseAlias = "-v";
 
             // Day flags - used for date argument
+            public const string Yesterday = "--yesterday";
+            public const string YesterdayAlias = "-y";
+
             public const string Today = "--today";
             public const string TodayAlias = "-t";
 

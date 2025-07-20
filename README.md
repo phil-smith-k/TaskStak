@@ -318,17 +318,18 @@ task view --unstaged                     # view unstaged
 The date argument provides an intuitive way to stage tasks using natural language, designed to speed up the staging process. You can use the natural language options, aliases for common days, or standard date formats.
 
 **Natural Language Options:**
-- `--today`, `-t` - Stage for today (default if no argument provided)
-- `--tomorrow`, `-tm` - Stage for tomorrow; useful for planning the next day
+- `--yesterday`, `-y` - Represents yesterday's date; useful for viewing tasks completed the day before
+- `--today`, `-t` - Represents today (default if no argument provided)
+- `--tomorrow`, `-tm` - Represents tomorrow's date; useful for planning the next day
 
 **Weekday Options:**
-- `--monday`, `-mon` - Stage for the next upcoming Monday
-- `--tuesday`, `-tue` - Stage for the next upcoming Tuesday
-- `--wednesday`, `-wed` - Stage for the next upcoming Wednesday
-- `--thursday`, `-thu` - Stage for the next upcoming Thursday
-- `--friday`, `-fri` - Stage for the next upcoming Friday
-- `--saturday`, `-sat` - Stage for the next upcoming Saturday
-- `--sunday`, `-sun` - Stage for the next upcoming Sunday
+- `--monday`, `-mon` - Represents the closest upcoming Monday
+- `--tuesday`, `-tue` - Represents the closest upcoming Tuesday
+- `--wednesday`, `-wed` - Represents the closest upcoming Wednesday
+- `--thursday`, `-thu` - Represents the closest upcoming Thursday
+- `--friday`, `-fri` - Represents the closest upcoming Friday
+- `--saturday`, `-sat` - Represents the closest upcoming Saturday
+- `--sunday`, `-sun` - Represents the closest upcoming Sunday
 
 **Date Formats:**
 - `yyyy-MM-dd` - ISO format (e.g., `2025-01-15`)

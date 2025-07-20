@@ -96,6 +96,9 @@ namespace TaskStak.CLI.Utils
 
             date = str.ToLowerInvariant() switch
             {
+                Constants.Options.Yesterday => today.AddDays(-1),
+                Constants.Options.YesterdayAlias => today.AddDays(-1),
+
                 Constants.Options.Today => today,
                 Constants.Options.TodayAlias => today,
 
