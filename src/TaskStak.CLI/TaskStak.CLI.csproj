@@ -10,7 +10,7 @@
 
   <PropertyGroup>
     <PackageId>TaskStak</PackageId>
-    <Version>1.1.2</Version>
+    <Version>1.1.3</Version>
     <Authors>Philip Smith</Authors>
     <Description>TaskStak - A developer-focused, performant task management CLI tool</Description>
   </PropertyGroup>
